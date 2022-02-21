@@ -1,19 +1,27 @@
 {
   "name": "cw",
   "version": "1.0.0",
-  "description": "Lego store",
+  "description": "lego store",
   "main": "svr.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node svr.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/UP2011325/lego-store-cw.git"
   },
-  "author": "UP2011325",
+  "author": "up2011325",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/UP2011325/lego-store-cw/issues"
   },
-  "homepage": "https://github.com/UP2011325/lego-store-cw#readme"
+  "homepage": "https://github.com/UP2011325/lego-store-cw#readme",
+  "dependencies": {
+    "express": "^4.17.3"
+  },
+  "devDependencies": {
+    "eslint": "^8.9.0",
+    "eslint-config-portsoc": "^1.0.0"
+  }
 }

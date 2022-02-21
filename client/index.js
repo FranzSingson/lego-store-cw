@@ -1,6 +1,3 @@
-
-
-
 function makeGrid() {
     const maxProducts = 50;
     for (let i = 1; i < maxProducts; i++) {
@@ -19,8 +16,6 @@ function makeGrid() {
     }
 }
 
-
-
 function divideBoxes() {
     const allBoxes = document.querySelectorAll('.allBoxes-class');
     for (const eachBox of allBoxes) {
@@ -37,9 +32,6 @@ function divideBoxes() {
         eachBox.append(picDesc);
     }
 }
-
-
-
 
 makeGrid();
 divideBoxes();
