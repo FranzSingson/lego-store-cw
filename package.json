@@ -1,11 +1,19 @@
 {
   "name": "cw",
   "version": "1.0.0",
-  "description": "Lego Store website",
+  "description": "Lego store",
   "main": "svr.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UP2011325/lego-store-cw.git"
+  },
   "author": "UP2011325",
-  "license": "ISC"
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/UP2011325/lego-store-cw/issues"
+  },
+  "homepage": "https://github.com/UP2011325/lego-store-cw#readme"
 }
