@@ -1,6 +1,6 @@
 import { bricks } from './bricks.mjs';
 
-const maxProducts = 50;
+const maxProducts = bricks.length + 1;
 let bricksStock = 0;
 
 
@@ -28,7 +28,7 @@ function divideBoxes() {
     picDiv.className = 'picDiv-class';
     picDiv.id = `picDiv-id${count}`;
     count++;
-    picDiv.textContent = 'Product image goes here';
+    // picDiv.textContent = 'Product image goes here';
     eachBox.append(picDiv);
   }
 
@@ -40,7 +40,7 @@ function divideBoxes() {
     // newPara.textContent = 'Product desc goes here'; uncomment this
 
     // picDesc.append(newPara); uncomment this
-    picDesc.textContent = 'Product desc goes here';
+    // picDesc.textContent = 'Product desc goes here';
     eachBox.append(picDesc);
   }
 }
@@ -53,20 +53,46 @@ function insertProduct() {
     const imgElem = document.createElement('img');
     imgElem.src = bricks[bricksStock].imgSrc;
     picDiv.appendChild(imgElem);
-    imgElem.setAttribute('style', 'height: 75%;');
+    imgElem.setAttribute('style', 'height: 100%; display: block; margin-left: auto; margin-right: auto; ');
 
     const descDiv = allBox.querySelector('.descDiv-class');
-    const paraElem = document.createElement('p');
-    paraElem.textContent = `${'ID: ' + bricks[bricksStock].id + ' Colour: ' + bricks[bricksStock].colour + ' Price: ' + bricks[bricksStock].price}`;
+    descDiv.id = `descDiv-id${bricks[bricksStock].id}`;
+    const newIDElem = document.createElement('p');
+    newIDElem.textContent = `${'ID: ' + bricks[bricksStock].id}`;
 
-    descDiv.append(paraElem);
+    const newColElem = document.createElement('p');
+    newColElem.textContent = `${'Colour: ' + bricks[bricksStock].colour}`;
+
+    const newPriceElem = document.createElement('p');
+    newPriceElem.textContent = `${'Price: ' + bricks[bricksStock].price}`;
+
+    descDiv.append(newIDElem);
+    descDiv.append(newColElem);
+    descDiv.append(newPriceElem);
+
+
+    // const makeBtn = document.createElement('button');
+    // makeBtn.textContent = 'Add to basket';
+    // // makeBtn.append(clickMe);
+    // makeBtn.type = "button";
+    // descDiv.append(makeBtn);
     bricksStock++;
   }
 }
 
+function createButton() {
+  const allBoxes = document.querySelectorAll('.descDiv-class');
+  for (const allBox of allBoxes) {
+    const makeBtn = document.createElement('button');
+    makeBtn.textContent = 'Add to basket';
+    // makeBtn.append(clickMe);
+    makeBtn.type = 'button';
+    makeBtn.className = 'addToBasketButton-class';
+    allBox.append(makeBtn);
+  }
+}
 
 makeGrid();
 divideBoxes();
 insertProduct();
-
-// loop through the class of allBoxes-class
+createButton();

@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <link rel="stylesheet" href="style.css">
+<script src="https://cdn.auth0.com/js/auth0-spa-js/1.13/auth0-spa-js.production.js" async defer></script>
+<script type="module" src="auth0.js" async defer></script>
 
 <head>
     <meta charset="UTF-8">
@@ -16,8 +18,12 @@
 <div class="topnav">
     <a class="active" href="index.html">Home</a>
     <a href="basket.html">Basket</a>
-    <a href="user.html">Sign in</a>
     <a href="about.html">About</a>
+</div>
+<div class = "SignInContainer">
+    <button id="login" disabled="true">Log in</button>
+    <button id="logout" disabled="true">Log out</button>
+    <p id="greeting">Hello!</p>
 </div>
 
 <h2>This is the Home page</h2>

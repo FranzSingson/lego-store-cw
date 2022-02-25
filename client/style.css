@@ -40,7 +40,7 @@ h1 {
 
 
 .allBoxes-class{
-    height: 20rem;
+    height: 22rem;
     width: 15rem;
     border: black solid 1px;
     background: yellow;
@@ -50,25 +50,31 @@ h1 {
     /* margin: 5rem 5rem 5rem 5rem; */
 }
 
-.SignInContainer {
+/* .SignInContainer {
     height: 50px;
     width: 50px;
     border: black solid;
     background-color: red;
-}
+} */
 
 .picDiv-class {
   height: 200px;
   /* width: 15rem; */
-  background: lightblue;
+  background: white;
   margin: 10px 10px 10px 10px;
   /* padding-top: 10px; */
+  border: black solid 1px;
 }
 
 .descDiv-class {
-  height: 85px;
+  height: 100px;
   /* width: 15rem; */
+  border: black solid 1px;
   background: lightblue;
   margin: 10px 10px 10px 10px;
-  /* padding-top: 10px; */
+}
+
+p {
+  margin: 0px;
+  padding: 0px;
 }
