@@ -1,7 +1,10 @@
+// import { handle } from 'express/lib/application';
 import { bricks } from './bricks.mjs';
 
 const maxProducts = bricks.length + 1;
 let bricksStock = 0;
+
+let basket = [];
 
 
 function makeGrid() {
@@ -58,6 +61,7 @@ function insertProduct() {
     const descDiv = allBox.querySelector('.descDiv-class');
     descDiv.id = `descDiv-id${bricks[bricksStock].id}`;
     const newIDElem = document.createElement('p');
+    newIDElem.id = `${bricks[bricksStock].id}`;
     newIDElem.textContent = `${'ID: ' + bricks[bricksStock].id}`;
 
     const newColElem = document.createElement('p');
@@ -66,33 +70,65 @@ function insertProduct() {
     const newPriceElem = document.createElement('p');
     newPriceElem.textContent = `${'Price: ' + bricks[bricksStock].price}`;
 
-    descDiv.append(newIDElem);
-    descDiv.append(newColElem);
-    descDiv.append(newPriceElem);
+    const button = createButton(bricks[bricksStock].id);
+    descDiv.append(newIDElem, newColElem, newPriceElem, button);
+    // descDiv.append(newColElem);
+    // descDiv.append(newPriceElem);
+    // createButton()
 
-
-    // const makeBtn = document.createElement('button');
-    // makeBtn.textContent = 'Add to basket';
-    // // makeBtn.append(clickMe);
-    // makeBtn.type = "button";
-    // descDiv.append(makeBtn);
     bricksStock++;
   }
 }
 
-function createButton() {
-  const allBoxes = document.querySelectorAll('.descDiv-class');
-  for (const allBox of allBoxes) {
-    const makeBtn = document.createElement('button');
-    makeBtn.textContent = 'Add to basket';
-    // makeBtn.append(clickMe);
-    makeBtn.type = 'button';
-    makeBtn.className = 'addToBasketButton-class';
-    allBox.append(makeBtn);
+function createButton(id) {
+  const makeBtn = document.createElement('button');
+  makeBtn.textContent = 'Add to basket';
+  makeBtn.type = 'button';
+  makeBtn.dataset.id = id;
+  makeBtn.className = 'addToBasketButton-class';
+  return makeBtn;
+}
+
+function addToBasket(e) {
+  // console.log(bricks[e.target.dataset.id]);
+  for (let i = 0; i < bricks.length; i++) {
+    if (bricks[i] === bricks[e.target.dataset.id]) {
+      // console.log(bricks[e.target.dataset.id])
+
+
+      // storeLocally(bricks[e.target.dataset.id])
+
+      basket.push(bricks[e.target.dataset.id])
+    }
+  }
+
+  storeLocally(basket);
+  // console.log(basket);
+}
+
+// use filter, where = id
+// Possibly use map or object,
+
+function storeLocally(data) {
+  // console.log(data)
+  localStorage.setItem('myObject', JSON.stringify(data));
+  // console.log(e.target.dataset)
+  const cat = localStorage.getItem('myObject');
+}
+
+
+function handleClick() {
+  const buttons = document.querySelectorAll('.addToBasketButton-class');
+  for (const button of buttons) {
+    button.addEventListener('click', addToBasket);
   }
 }
+
 
 makeGrid();
 divideBoxes();
 insertProduct();
 createButton();
+handleClick();
+
+// addToBasket();
