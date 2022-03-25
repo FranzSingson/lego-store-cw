@@ -68,13 +68,10 @@ function insertProduct() {
     newColElem.textContent = `${'Colour: ' + bricks[bricksStock].colour}`;
 
     const newPriceElem = document.createElement('p');
-    newPriceElem.textContent = `${'Price: ' + bricks[bricksStock].price}`;
+    newPriceElem.textContent = `${'Price: £' + bricks[bricksStock].price}`;
 
     const button = createButton(bricks[bricksStock].id);
     descDiv.append(newIDElem, newColElem, newPriceElem, button);
-    // descDiv.append(newColElem);
-    // descDiv.append(newPriceElem);
-    // createButton()
 
     bricksStock++;
   }
@@ -88,6 +85,10 @@ function createButton(id) {
   makeBtn.className = 'addToBasketButton-class';
   return makeBtn;
 }
+
+
+
+
 
 function addToBasket(e) {
   // console.log(bricks[e.target.dataset.id]);
@@ -129,6 +130,6 @@ makeGrid();
 divideBoxes();
 insertProduct();
 createButton();
-handleClick();
+// handleClick();
 
 // addToBasket();
