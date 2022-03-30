@@ -2,16 +2,16 @@ import { bricks } from './bricks.mjs';
 
 const carts = document.querySelectorAll('.addToBasketButton-class');
 
-function init1() {
-  for (let i = 0; i < carts.length; i++) {
-    carts[i].addEventListener('click', () => {
-      // console.log(bricks[i]);
-      cartNumbers(bricks[i]);
-      totalCost(bricks[i]);
-    });
-  }
+
+for (let i = 0; i < carts.length; i++) {
+  carts[i].addEventListener('click', () => {
+    // console.log(bricks[i]);
+    cartNumbers(bricks[i]);
+    totalCost(bricks[i]);
+  });
 }
 
+// Function called outside
 function updateBasketNum() {
   const productNumbers = localStorage.getItem('cartQty');
   if (productNumbers) {
@@ -19,6 +19,7 @@ function updateBasketNum() {
   }
 }
 
+// Function called by global loop
 function cartNumbers(product) {
   let productNumbers = localStorage.getItem('cartQty');
 
@@ -30,7 +31,7 @@ function cartNumbers(product) {
     localStorage.setItem('cartQty', productNumbers + 1);
     document.querySelector('.basket span').textContent = productNumbers + 1;
   }
-  // If there is products beforehand
+  // If there is no products beforehand
   else {
     localStorage.setItem('cartQty', 1);
     document.querySelector('.basket span').textContent = 1;
@@ -38,6 +39,7 @@ function cartNumbers(product) {
   setItems(product);
 }
 
+// Function called by another function
 function setItems(product) {
   let cartItems = localStorage.getItem('productsInCart');
   cartItems = JSON.parse(cartItems);
@@ -62,6 +64,7 @@ function setItems(product) {
   console.log('my cartItems are', cartItems);
 }
 
+// Function called by global loop
 function totalCost(product) {
   let cartCost = localStorage.getItem('totalCost');
 
@@ -80,8 +83,6 @@ function totalCost(product) {
 
 // createBasketContent has to be here
 createBasketContent();
-// plusBtn();
-// init1();
 
 
 function quantityButtons() {
@@ -117,7 +118,7 @@ function cartNumbers2(product) {
     localStorage.setItem('cartQty', productNumbers - 1);
     document.querySelector('.basket span').textContent = productNumbers - 1;
   }
-  // If there is products beforehand
+  // If there is no products beforehand
   else {
     localStorage.setItem('cartQty', 1);
     document.querySelector('.basket span').textContent = 1;
@@ -164,11 +165,6 @@ function totalCost2(product) {
   }
 }
 
-/* Notes
-Atm, + and - button works but needs the page to be refreshed to update the createBasketContent page
-When Quantity is 1 and negative button is pressed, it should remove the prodcut from the page. Therefore update local storage.
-*/
-
 
 function createBasketContent() {
   let basketItems = localStorage.getItem('productsInCart');
@@ -182,6 +178,9 @@ function createBasketContent() {
     productContainer.innerHTML += `
     <div class="basketTotalContainer">
         <h4 class="basketTotal">Your Total is: £${cartCost}</h4>
+        <button class="clear-basket-btn">Clear Basket</button>
+        <button class="next-basket-btn">Next</button>
+    </div>
     `;
     Object.values(basketItems).map(item => {
       productContainer.innerHTML += `
@@ -189,12 +188,11 @@ function createBasketContent() {
         <span>${item.name} for £${item.price}</span>
         <img src="${item.imgSrc}">
         <button class="subtract-btn" type="button">-</button>
-        <span>Quantity: ${item.inCart}</span>
+        <span class="qty-span">${item.inCart}</span>
         <button class="plus-btn" type="button">+</button>
-        <button id="remove-button" type="button">Remove Product</button>
-        <span>£${item.inCart * item.price}</span>
+        <button class="remove-btn" type="button">Remove Product</button>
+        <span class="qty-x-price">£${item.inCart * item.price}</span>
         </div>
-
         `;
     });
   }
@@ -202,6 +200,102 @@ function createBasketContent() {
   // console.log(bask)
 }
 
-init1();
 updateBasketNum();
 quantityButtons();
+
+
+// Loop through + buttons
+const plusBtn = document.querySelectorAll('.plus-btn');
+
+for (let i = 0; i < plusBtn.length; i++) {
+  plusBtn[i].addEventListener('click', () => {
+    updateBasket(plusBtn[i]);
+    // totalCost(bricks[i]);
+  });
+}
+
+// Loops through - buttons
+const subtractBtn = document.querySelectorAll('.subtract-btn');
+
+for (let i = 0; i < subtractBtn.length; i++) {
+  subtractBtn[i].addEventListener('click', () => {
+    updateBasket(subtractBtn[i]);
+  });
+}
+
+function updateBasket(elem) {
+  const elemParentId = elem.parentElement.id;
+
+  let basketItems = localStorage.getItem('productsInCart');
+  const totalCost = localStorage.getItem('totalCost');
+  basketItems = JSON.parse(basketItems);
+
+  // This updates the Quantity
+  const spans = document.querySelector(`#${elemParentId} > .qty-span`);
+  spans.textContent = basketItems[elemParentId].inCart;
+
+  // This updates the total
+  const basketTotalDiv = document.querySelector('.basketTotal');
+  basketTotalDiv.textContent = `Your Total is: £${totalCost}`;
+
+  // This will update the Qty x Price
+  const qtyTimesPrice = document.querySelector(`#${elemParentId} > .qty-x-price`);
+  qtyTimesPrice.textContent = `£${basketItems[elemParentId].inCart * basketItems[elemParentId].price}`;
+}
+
+
+// XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+// When product is qty zero, make sure it calls the remove button.
+
+// Stuck on remove product button atm
+
+// Loop through Remove Product buttons
+const removeProductBtns = document.querySelectorAll('.remove-btn');
+
+for (let i = 0; i < removeProductBtns.length; i++) {
+  removeProductBtns[i].addEventListener('click', () => {
+    removeProductBtn(removeProductBtns[i]);
+  });
+}
+
+function removeProductBtn(elem) {
+  const temp = [];
+  const removeBtn = document.querySelector('.remove-btn');
+  const brickId = elem.parentElement.id;
+
+  let basketItems = localStorage.getItem('productsInCart');
+  // let totalCost = localStorage.getItem("totalCost")
+  basketItems = JSON.parse(basketItems);
+
+  temp.push(basketItems);
+
+  console.log(temp.brickId);
+  // console.log(basketItems[brickId]);
+
+  // localStorage.removeItem("productsInCar[brickId])
+
+  // console.log(localStorage)
+  console.log(brickId);
+}
+
+// Clear Basket button works!
+function clearBasket() {
+  const container = document.querySelector('.products-container');
+  const clearBasketBtn = document.querySelector('.clear-basket-btn');
+  clearBasketBtn.addEventListener('click', () => {
+    localStorage.clear();
+
+    const productDivs = document.querySelectorAll('.product');
+    document.querySelector('.basketTotalContainer').remove();
+    for (const productDiv of productDivs) {
+      productDiv.remove();
+    }
+    document.querySelector('.basket span').textContent = 0;
+
+    const h3Elem = document.createElement('h3');
+    h3Elem.textContent = 'Your basket is empty at the moment.';
+    container.append(h3Elem);
+  });
+}
+
+clearBasket();
