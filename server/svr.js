@@ -27,8 +27,6 @@ app.listen(port, function () {
 
 
 
-
-
 // Note to self: To start this with "npm start" in the terminal
 // To stop, CTRL C
 // In URL type  localhost:8080

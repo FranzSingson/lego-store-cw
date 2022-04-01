@@ -6,21 +6,28 @@ function quantityButtons() {
   const plusProducts = document.querySelectorAll('.plus-btn');
   for (let i = 0; i < plusProducts.length; i++) {
     plusProducts[i].addEventListener('click', () => {
-      // console.log(bricks[i]);
-      addCartNumbers(bricks[i]);
-      addTotalCost(bricks[i]);
+      for (const brick of bricks) {
+        if (brick.name === plusProducts[i].parentElement.id) {
+          addCartNumbers(brick);
+          addTotalCost(brick);
           updateBasket(plusProducts[i]);
+        }
+      }
     });
   }
 
-  // Subtract buttton#
+  // Subtract buttton
   const subtractProducts = document.querySelectorAll('.subtract-btn');
   for (let i = 0; i < subtractProducts.length; i++) {
     subtractProducts[i].addEventListener('click', () => {
       // console.log(bricks[i]);
-      subCartNumbers(bricks[i]);
-      subTotalCost(bricks[i]);
-      updateBasket(subtractProducts[i]);
+      for (const brick of bricks) {
+        if (brick.name === plusProducts[i].parentElement.id) {
+          subCartNumbers(brick);
+          subTotalCost(brick);
+          updateBasket(subtractProducts[i]);
+        }
+      }
     });
   }
 }
@@ -105,5 +112,44 @@ function updateBasket(elem) {
   qtyTimesPrice.textContent = `£${basketItems[elemParentId].inCart * basketItems[elemParentId].price}`;
 }
 
+// Clears the basket
+function clearBasket() {
+  const container = document.querySelector('.basket-products-container');
+  const clearBasketBtn = document.querySelector('.clear-basket-btn');
+  clearBasketBtn.addEventListener('click', () => {
+    localStorage.clear();
+
+    const productDivs = document.querySelectorAll('.product');
+    document.querySelector('.basketTotalContainer').remove();
+    for (const productDiv of productDivs) {
+      productDiv.remove();
+    }
+    document.querySelector('.basket span').textContent = 0;
+
+    const h3Elem = document.createElement('h3');
+    h3Elem.textContent = 'Your basket is empty at the moment.';
+    container.append(h3Elem);
+  });
+}
+
+
+function removeBtn() {
+  const removeBtns = document.querySelectorAll('.remove-btn');
+  let basketItems = JSON.parse(localStorage.getItem('productsInCart'));
+
+  for (let i = 0; i < removeBtns.length; i++) {
+    removeBtns[i].addEventListener('click', () => {
+      testing2(bricks[i]);
+    });
+  }
+}
+
+function testing2() {
+  const basketItems = JSON.parse(localStorage.getItem('productsInCart'));
+  console.log(basketItems);
+}
+
 // updateBasket();
 quantityButtons();
+clearBasket();
+removeBtn();

@@ -4,9 +4,6 @@ import { bricks } from './bricks.mjs';
 const maxProducts = bricks.length + 1;
 let bricksStock = 0;
 
-let basket = [];
-
-
 function makeGrid() {
   for (let i = 1; i < maxProducts; i++) {
     const newSection = document.createElement('div');
@@ -70,8 +67,9 @@ function insertProduct() {
     const newPriceElem = document.createElement('p');
     newPriceElem.textContent = `${'Price: £' + bricks[bricksStock].price}`;
 
-    const button = createButton(bricks[bricksStock].id);
-    descDiv.append(newIDElem, newColElem, newPriceElem, button);
+    const addToBasketButton = createButton(bricks[bricksStock].id);
+    const addToFavButton = createFavouritesBtn(bricks[bricksStock].id);
+    descDiv.append(newIDElem, newColElem, newPriceElem, addToBasketButton, addToFavButton);
 
     bricksStock++;
   }
@@ -86,50 +84,16 @@ function createButton(id) {
   return makeBtn;
 }
 
-
-
-
-
-function addToBasket(e) {
-  // console.log(bricks[e.target.dataset.id]);
-  for (let i = 0; i < bricks.length; i++) {
-    if (bricks[i] === bricks[e.target.dataset.id]) {
-      // console.log(bricks[e.target.dataset.id])
-
-
-      // storeLocally(bricks[e.target.dataset.id])
-
-      basket.push(bricks[e.target.dataset.id])
-    }
-  }
-
-  storeLocally(basket);
-  // console.log(basket);
+function createFavouritesBtn(id) {
+  const makeFavBtn = document.createElement('button');
+  makeFavBtn.textContent = 'Add to favourites';
+  makeFavBtn.type = 'button';
+  makeFavBtn.dataset.id = id;
+  makeFavBtn.className = 'add-favourites-btn-class';
+  return makeFavBtn;
 }
-
-// use filter, where = id
-// Possibly use map or object,
-
-function storeLocally(data) {
-  // console.log(data)
-  localStorage.setItem('myObject', JSON.stringify(data));
-  // console.log(e.target.dataset)
-  const cat = localStorage.getItem('myObject');
-}
-
-
-function handleClick() {
-  const buttons = document.querySelectorAll('.addToBasketButton-class');
-  for (const button of buttons) {
-    button.addEventListener('click', addToBasket);
-  }
-}
-
 
 makeGrid();
 divideBoxes();
 insertProduct();
-createButton();
-// handleClick();
 
-// addToBasket();
