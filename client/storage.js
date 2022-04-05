@@ -218,3 +218,5 @@ Add more lego bricks
 */
 
 export { addCartNumbers, addSetItems, addTotalCost };
+
+// Push cart items into an array and store it as an array of objects

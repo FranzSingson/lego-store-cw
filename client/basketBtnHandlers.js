@@ -132,20 +132,47 @@ function clearBasket() {
   });
 }
 
-
 function removeBtn() {
   const removeBtns = document.querySelectorAll('.remove-btn');
   let basketItems = JSON.parse(localStorage.getItem('productsInCart'));
 
+
   for (let i = 0; i < removeBtns.length; i++) {
     removeBtns[i].addEventListener('click', () => {
-      testing2(bricks[i]);
+      // testing2(bricks[i]);
+      const brickNum = removeBtns[i].parentElement.id
+      // console.log(basketItems);
+      // console.log(brickNum)
+      // temp.push(basketItems)
+      // const brickNum = "brick0"
+
+      // console.log(...brickNum)
+      let tempArr;
+      const cartItems = Object.values(basketItems);
+      tempArr = cartItems;
+
+      // console.log(brickNum)
+      for (let i = 0; i < tempArr.length; i++) {
+        // console.log(temp[i].name)
+        if (brickNum == tempArr[i].name) {
+          // console.log("arr before", tempArr)
+          // tempArr.splice(i, 1)
+          // console.log("Arr after", tempArr)
+          console.log(brickNum)
+          // localStorage.setItem('productsInCart', JSON.stringify(tempArr));
+        }
+      }
     });
   }
 }
 
+// Notes, if array[i].name is equal to brick10, then remove that index and update the array
+// Set the array as the new localStorage cart
+
 function testing2() {
   const basketItems = JSON.parse(localStorage.getItem('productsInCart'));
+
+  // const brickNum
   console.log(basketItems);
 }
 
