@@ -31,6 +31,7 @@ async function updateAuthUI() {
     const el = document.getElementById('greeting');
     el.textContent = `Hello ${user.name} (${user.email})!`;
   }
+  console.log(isAuthenticated)
 }
 
 async function login() {

@@ -21,7 +21,7 @@ function makeGrid() {
 }
 
 function divideBoxes() {
-  let count = 1;
+  let count = 0;
   const allBoxes = document.querySelectorAll('.allBoxes-class');
   for (const eachBox of allBoxes) {
     const picDiv = document.createElement('div');
@@ -36,11 +36,6 @@ function divideBoxes() {
     const picDesc = document.createElement('div');
     picDesc.className = 'descDiv-class';
 
-    // const newPara = document.createElement("p"); uncomment this
-    // newPara.textContent = 'Product desc goes here'; uncomment this
-
-    // picDesc.append(newPara); uncomment this
-    // picDesc.textContent = 'Product desc goes here';
     eachBox.append(picDesc);
   }
 }

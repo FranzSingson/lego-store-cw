@@ -1,30 +1,32 @@
 import { bricks } from './bricks.mjs';
 
 const carts = document.querySelectorAll('.addToBasketButton-class');
-
 for (let i = 0; i < carts.length; i++) {
   carts[i].addEventListener('click', () => {
     // console.log(bricks[i]);
+    addSetItems(bricks[i]);
     addCartNumbers(bricks[i]);
     addTotalCost(bricks[i]);
+    updateBasketNum();
   });
 }
+
 
 const favBtn = document.querySelectorAll('.add-favourites-btn-class');
 
 for (let i = 0; i < favBtn.length; i++) {
   favBtn[i].addEventListener('click', () => {
-    // console.log(bricks[i]);
     addFavNumbers(bricks[i]);
-    // addTotalCost(bricks[i]);
   });
 }
 
 // Function called outside
 function updateBasketNum() {
-  const productNumbers = localStorage.getItem('cartQty');
+  let productNumbers = localStorage.getItem('productsInCart');
+  productNumbers = JSON.parse(productNumbers);
+
   if (productNumbers) {
-    document.querySelector('.basket span').textContent = productNumbers;
+    document.querySelector('.basket span').textContent = productNumbers.length;
   }
   const addFavNumbers = localStorage.getItem('favQty');
   if (addFavNumbers) {
@@ -32,72 +34,87 @@ function updateBasketNum() {
   }
 }
 
-updateBasketNum();
-
 // Function called by global loop
-function addCartNumbers(product) {
-  let productNumbers = localStorage.getItem('cartQty');
-
-  productNumbers = parseInt(productNumbers);
-  // console.log(productNumbers);
-
+function addCartNumbers() {
+  let productNumbers = localStorage.getItem('productsInCart');
+  productNumbers = JSON.parse(productNumbers);
+  console.log(productNumbers)
   // If productNumbers exist
   if (productNumbers) {
-    localStorage.setItem('cartQty', productNumbers + 1);
-    document.querySelector('.basket span').textContent = productNumbers + 1;
+    localStorage.setItem('cartQty', productNumbers.length);
+    document.querySelector('.basket span').textContent = productNumbers.length;
   }
   // If there is no products beforehand
   else {
     localStorage.setItem('cartQty', 1);
     document.querySelector('.basket span').textContent = 1;
   }
-  addSetItems(product);
 }
 
 // Function called by another function
 function addSetItems(product) {
   let cartItems = localStorage.getItem('productsInCart');
   cartItems = JSON.parse(cartItems);
+  let tempArr = [];
 
   if (cartItems != null) {
-    if (cartItems[product.name] === undefined) {
-      cartItems = {
-        ...cartItems,
-        [product.name]: product,
-      };
-    }
-    cartItems[product.name].inCart += 1;
+    tempArr = cartItems;
+    tempArr.push(product);
+    duplicateCheck(tempArr, cartItems);
   } else {
+    console.log('cart is empty so we add', product);
     product.inCart = 1;
-
-    cartItems = {
-      [product.name]: product,
-    };
+    tempArr.push(product);
+    localStorage.setItem('productsInCart', JSON.stringify(tempArr));
   }
-  localStorage.setItem('productsInCart', JSON.stringify(cartItems));
-  // plusBtn(product)
-  console.log('my cartItems are', cartItems);
+
+  // let tempArr1 = [];
+  // tempArr1 = cartItems;
+  // for (const basketItem of tempArr1) {
+  //   basketItem.inCart = 1;
+  // }
+  // localStorage.setItem('productsInCart', JSON.stringify(tempArr1));
+}
+
+// This function removes object duplicates in the tempArr
+// https://stackoverflow.com/questions/40303637/how-to-add-non-duplicate-objects-in-an-array-in-javascript
+function duplicateCheck(array) {
+  const result = array.filter(function (e) {
+    const key = Object.keys(e).map(k => e[k]).join('|');
+    if (!this[key]) {
+      this[key] = true;
+      return true;
+    }
+  }, {});
+  for (const basketItem of result) {
+    basketItem.inCart = 1;
+  }
+  localStorage.setItem('productsInCart', JSON.stringify(result));
+
 }
 
 // Function called by global loop
-function addTotalCost(product) {
-  let cartCost = localStorage.getItem('totalCost');
+function addTotalCost() {
+  const basketItems = JSON.parse(localStorage.getItem('productsInCart'));
 
-  //   Use parseFloat instead of parseInt as we have decimal.
-  if (cartCost != null) {
-    cartCost = parseFloat(cartCost);
-    localStorage.setItem('totalCost', cartCost + product.price);
+  if (basketItems != null) {
+    let totalCost = 0;
+    for (const basketItem of basketItems) {
+      totalCost += basketItem.price;
+      localStorage.setItem('totalCost', totalCost);
+    }
   } else {
-    localStorage.setItem('totalCost', product.price);
+    localStorage.setItem('totalCost', basketItems[0].price);
   }
 }
 
 function createBasketContent() {
   let basketItems = localStorage.getItem('productsInCart');
   basketItems = JSON.parse(basketItems);
-  const productContainer = document.querySelector('.basket-products-container');
 
-  const cartCost = localStorage.getItem('totalCost');
+  let productContainer = document.querySelector('.basket-products-container');
+
+  let cartCost = localStorage.getItem('totalCost');
 
   if (basketItems && productContainer) {
     // Empty the page first
@@ -126,6 +143,8 @@ function createBasketContent() {
     });
   }
 }
+
+
 
 // Stores favourites quantity
 function addFavNumbers(product) {
@@ -203,6 +222,7 @@ function createFavContent() {
   }
 }
 
+updateBasketNum();
 createBasketContent();
 createFavContent();
 
@@ -217,6 +237,6 @@ Start on payment page
 Add more lego bricks
 */
 
-export { addCartNumbers, addSetItems, addTotalCost };
+export { addCartNumbers, addSetItems, addTotalCost, createBasketContent };
 
 // Push cart items into an array and store it as an array of objects
