@@ -16,7 +16,7 @@ let bricksStock = 0;
 //   } else {
 //     console.log("not working")
 //   }
-  // return bricks;
+// return bricks;
 // }
 
 // console.log(bricks)
@@ -67,7 +67,7 @@ function insertProduct() {
     const picDiv = allBox.querySelector('.picDiv-class');
     const imgElem = document.createElement('img');
     imgElem.src = bricks[bricksStock].imgSrc;
-    imgElem.alt = `Image for brick${bricksStock}`
+    imgElem.alt = `Image for brick${bricksStock}`;
     picDiv.appendChild(imgElem);
     imgElem.setAttribute('style', 'height: 80%; display: block; margin-left: auto; margin-right: auto; ');
 

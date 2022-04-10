@@ -61,15 +61,15 @@ function subOne(item, elemId) {
   tempArr = basketItems;
   for (let i = 0; i < tempArr.length; i++) {
     if (tempArr[i].name === item.name) {
-      console.log(tempArr[i].inCart)
+      console.log(tempArr[i].inCart);
       if (tempArr[i].inCart === 1) {
         if (tempArr.length === 1) { // If there is one product left in the basketItems array with quantity of 1
-          removeFromLocalStorage(elemId)
+          removeFromLocalStorage(elemId);
           localStorage.clear();
           makeEmptyBasketContent();
         } else {
-          console.log(elemId)
-          removeFromLocalStorage(elemId)
+          console.log(elemId);
+          removeFromLocalStorage(elemId);
           // clearBasket();
         }
       } else {
@@ -116,7 +116,7 @@ function removeFromLocalStorage(id) {
   tempArr = basketItems;
   for (let i = 0; i < tempArr.length; i++) {
     if (tempArr[i].name === id) {
-      if (tempArr.length === 1) { //When the product is the last item in the basket and user presses remove product button)
+      if (tempArr.length === 1) { // When the product is the last item in the basket and user presses remove product button)
         localStorage.clear();
         makeEmptyBasketContent();
       } else {
@@ -154,9 +154,9 @@ function makeEmptyBasketContent() {
 }
 
 function nextBtnHandler() {
-  document.querySelector(".next-basket-btn").addEventListener("click", () => {
-    location.href = "./payment.html";
-  }) 
+  document.querySelector('.next-basket-btn').addEventListener('click', () => {
+    location.href = './payment.html';
+  });
 }
 
 quantityButtons();
