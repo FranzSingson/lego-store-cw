@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.auth0.com/js/auth0-spa-js/1.13/auth0-spa-js.production.js" async defer></script>
+<script type="module" src="auth0.js" async defer></script>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lego Store</title>
+
+    <style></style>
+</head>
+
+<h1>Lego Store</h1>
+
+
+<h2>This is the Payment page 🔒</h2>
+
+<body>
+    <div class="payment-div">
+        <input type="text" id="fName" name="firstName" placeholder="First Name">
+        <br>
+        <input type="text" id="lName" name="lastName" placeholder="Surname">
+        <br>
+        <input type="text" id="email" name="email" placeholder="Email">
+        <br>
+        <input type="number" id="telNo" name="telNo" placeholder="Tel No">
+        <br>
+        <br>
+        <input type="text" id="address1" name="address1" placeholder="Address Line 1">
+        <input type="text" id="address2" name="address2" placeholder="Address Line 2">
+        <br>
+        <input type="text" id="city" name="city" placeholder="City E.g Portsmouth">
+        <br>
+        <input type="text" id="county" name="county" placeholder="County E.g Hampshire">
+        <br>
+        <input type="text" id="postcode" name="postcode" placeholder="PO1 2QW">
+        <br>
+        <br>
+        <label>Payment by card:</label>
+        <br>
+        <input type="text" id="cardName" name="cardName" placeholder="Mr John Doe">
+        <br>
+        <input type="text" id="cardNum" name="cardNum" placeholder="XXXX XXXX XXXX XXXX">
+        <br>
+        <input type="month" id="cardExpiry" name="cardExpiry" placeholder="05/25">
+        <input type="number" id="cvv" name="cvv" placeholder="CVV">
+        <br>
+        <input type="submit" id="submit-btn">
+    </div>
+</body>
+
+<!-- <script src="index.js" type="module"></script> -->
+<!-- <script src="storage.js" type="module"></script> -->
+
+</html>

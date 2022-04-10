@@ -1,8 +1,28 @@
 // import { handle } from 'express/lib/application';
 import { bricks } from './bricks.mjs';
 
+// let bricks;
 const maxProducts = bricks.length + 1;
 let bricksStock = 0;
+
+// async function loadBricks() {
+//   const response = await fetch('/bricks')
+//   if (response.ok) {
+//     const data = await response.json();
+//     bricks = data;
+//     console.log(bricks.length)
+//     console.log(bricks)
+//     return data;
+//   } else {
+//     console.log("not working")
+//   }
+  // return bricks;
+// }
+
+// console.log(bricks)
+// const maxProducts = bricks.length + 1;
+// let bricksStock = 0;
+
 
 function makeGrid() {
   for (let i = 1; i < maxProducts; i++) {
@@ -47,8 +67,9 @@ function insertProduct() {
     const picDiv = allBox.querySelector('.picDiv-class');
     const imgElem = document.createElement('img');
     imgElem.src = bricks[bricksStock].imgSrc;
+    imgElem.alt = `Image for brick${bricksStock}`
     picDiv.appendChild(imgElem);
-    imgElem.setAttribute('style', 'height: 100%; display: block; margin-left: auto; margin-right: auto; ');
+    imgElem.setAttribute('style', 'height: 80%; display: block; margin-left: auto; margin-right: auto; ');
 
     const descDiv = allBox.querySelector('.descDiv-class');
     descDiv.id = `descDiv-id${bricks[bricksStock].id}`;
@@ -91,4 +112,4 @@ function createFavouritesBtn(id) {
 makeGrid();
 divideBoxes();
 insertProduct();
-
+// window.addEventListener('load', loadBricks);

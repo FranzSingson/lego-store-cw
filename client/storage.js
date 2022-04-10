@@ -38,7 +38,7 @@ function updateBasketNum() {
 function addCartNumbers() {
   let productNumbers = localStorage.getItem('productsInCart');
   productNumbers = JSON.parse(productNumbers);
-  console.log(productNumbers)
+  console.log(productNumbers);
   // If productNumbers exist
   if (productNumbers) {
     localStorage.setItem('cartQty', productNumbers.length);
@@ -90,7 +90,6 @@ function duplicateCheck(array) {
     basketItem.inCart = 1;
   }
   localStorage.setItem('productsInCart', JSON.stringify(result));
-
 }
 
 // Function called by global loop
@@ -112,9 +111,9 @@ function createBasketContent() {
   let basketItems = localStorage.getItem('productsInCart');
   basketItems = JSON.parse(basketItems);
 
-  let productContainer = document.querySelector('.basket-products-container');
+  const productContainer = document.querySelector('.basket-products-container');
 
-  let cartCost = localStorage.getItem('totalCost');
+  const cartCost = localStorage.getItem('totalCost');
 
   if (basketItems && productContainer) {
     // Empty the page first
@@ -132,7 +131,7 @@ function createBasketContent() {
       productContainer.innerHTML += `
         <div class="product" id="${lego.name}" >
         <span>${lego.name} for £${lego.price}</span>
-        <img src="${lego.imgSrc}">
+        <img style = "height: 25vh;" src="${lego.imgSrc}">
         <button class="subtract-btn" type="button">-</button>
         <span class="qty-span">${lego.inCart}</span>
         <button class="plus-btn" type="button">+</button>
@@ -143,8 +142,6 @@ function createBasketContent() {
     });
   }
 }
-
-
 
 // Stores favourites quantity
 function addFavNumbers(product) {

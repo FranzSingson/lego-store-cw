@@ -99,7 +99,7 @@ function removeProduct() {
   const removeBtn = document.querySelectorAll('.remove-btn');
   for (let i = 0; i < removeBtn.length; i++) {
     const parentId = removeBtn[i].parentElement.id;
-    removeBtn[i].addEventListener('click', e => {
+    removeBtn[i].addEventListener('click', () => {
       removeFromLocalStorage(parentId);
       createBasketContent();
     });
@@ -153,9 +153,16 @@ function makeEmptyBasketContent() {
   container.append(h3Elem);
 }
 
+function nextBtnHandler() {
+  document.querySelector(".next-basket-btn").addEventListener("click", () => {
+    location.href = "./payment.html";
+  }) 
+}
+
 quantityButtons();
 removeProduct();
 clearBasket();
+nextBtnHandler();
 
 // Issues atm, when I added brick0 in the cart, and click add to cart on brick0 again, it will be added, find solution for this
 // It will only be fixed once a new item is selected and therefore replacing the last item in the array

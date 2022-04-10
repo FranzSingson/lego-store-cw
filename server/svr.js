@@ -1,6 +1,7 @@
 // Auth0
 import authConfig from './auth-config.js';
 import express from 'express';
+import { bricks } from '../client/bricks.mjs';
 import path from 'path';
 import url from 'url';
 
@@ -13,6 +14,10 @@ const port = 8080;
 app.get('/auth-config', (req, res) => {
   res.json(authConfig);
 });
+
+// app.get('/bricks', (req, res) => {
+//   res.json(bricks);
+// });
 
 app.use(express.static('client'));
 
