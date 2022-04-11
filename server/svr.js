@@ -15,9 +15,9 @@ app.get('/auth-config', (req, res) => {
   res.json(authConfig);
 });
 
-// app.get('/bricks', (req, res) => {
-//   res.json(bricks);
-// });
+app.get('/bricks', (req, res) => {
+  res.json(bricks);
+});
 
 app.use(express.static('client'));
 

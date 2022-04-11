@@ -1,14 +1,26 @@
-import { bricks } from './bricks.mjs';
+// import { bricks } from './bricks.mjs';
 import { createBasketContent } from './storage.js';
 
-function quantityButtons() {
+async function loadBricks() {
+  const response = await fetch('/bricks')
+  if (response.ok) {
+    const data = await response.json();
+    quantityButtons(data);
+  } else {
+    console.log("not working")
+  }
+}
+
+function quantityButtons(dataArray) {
   // Plus button
-  const plusProducts = document.querySelectorAll('.plus-btn');
-  for (let i = 0; i < plusProducts.length; i++) {
-    plusProducts[i].addEventListener('click', () => {
-      for (const brick of bricks) {
-        if (brick.name === plusProducts[i].parentElement.id) {
-          addOne(brick, plusProducts[i].parentElement.id);
+  const plusBtn = document.querySelectorAll('.plus-btn');
+  for (let i = 0; i < plusBtn.length; i++) {
+    plusBtn[i].addEventListener('click', () => {
+      for (const brick of dataArray) {
+        if (brick.name === plusBtn[i].parentElement.id) {
+          console.log(plusBtn[i].parentElement.id)
+          console.log(brick.name)
+          addOne(brick, plusBtn[i].parentElement.id);
           updateBasketPageTotal();
         }
       }
@@ -16,13 +28,13 @@ function quantityButtons() {
   }
 
   // Subtract buttton
-  const subtractProducts = document.querySelectorAll('.subtract-btn');
-  for (let i = 0; i < subtractProducts.length; i++) {
-    subtractProducts[i].addEventListener('click', () => {
+  const subtractBtn = document.querySelectorAll('.subtract-btn');
+  for (let i = 0; i < subtractBtn.length; i++) {
+    subtractBtn[i].addEventListener('click', () => {
       // console.log(bricks[i]);
-      for (const brick of bricks) {
-        if (brick.name === plusProducts[i].parentElement.id) {
-          subOne(brick, plusProducts[i].parentElement.id);
+      for (const brick of dataArray) {
+        if (brick.name === subtractBtn[i].parentElement.id) {
+          subOne(brick, subtractBtn[i].parentElement.id);
           updateBasketPageTotal();
         }
       }
@@ -159,7 +171,7 @@ function nextBtnHandler() {
   });
 }
 
-quantityButtons();
+loadBricks();
 removeProduct();
 clearBasket();
 nextBtnHandler();

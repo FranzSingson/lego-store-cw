@@ -1,24 +1,43 @@
-import { bricks } from './bricks.mjs';
+// import { bricks } from './bricks.mjs';
 
-const carts = document.querySelectorAll('.addToBasketButton-class');
-for (let i = 0; i < carts.length; i++) {
-  carts[i].addEventListener('click', () => {
-    // console.log(bricks[i]);
-    addSetItems(bricks[i]);
-    addCartNumbers(bricks[i]);
-    addTotalCost(bricks[i]);
-    updateBasketNum();
-  });
+
+async function loadBricks() {
+  const response = await fetch('/bricks')
+  if (response.ok) {
+    const data = await response.json();
+    const carts = document.querySelectorAll('.addToBasketButton-class');
+    for (let i = 0; i < carts.length; i++) {
+      carts[i].addEventListener('click', () => {
+        // console.log(bricks[i]);
+        addSetItems(data[i]);
+        addCartNumbers(data[i]);
+        addTotalCost(data[i]);
+        updateBasketNum();
+      });
+    }
+
+    const favBtn = document.querySelectorAll('.add-favourites-btn-class');
+    for (let i = 0; i < favBtn.length; i++) {
+      favBtn[i].addEventListener('click', () => {
+        addFavNumbers(data[i]);
+      });
+    }
+  } else {
+    console.log("not working")
+  }
 }
 
+// const carts = document.querySelectorAll('.addToBasketButton-class');
+// for (let i = 0; i < carts.length; i++) {
+//   carts[i].addEventListener('click', () => {
+//     // console.log(bricks[i]);
+//     addSetItems(bricks[i]);
+//     addCartNumbers(bricks[i]);
+//     addTotalCost(bricks[i]);
+//     updateBasketNum();
+//   });
+// }
 
-const favBtn = document.querySelectorAll('.add-favourites-btn-class');
-
-for (let i = 0; i < favBtn.length; i++) {
-  favBtn[i].addEventListener('click', () => {
-    addFavNumbers(bricks[i]);
-  });
-}
 
 // Function called outside
 function updateBasketNum() {
@@ -219,6 +238,8 @@ function createFavContent() {
   }
 }
 
+
+loadBricks();
 updateBasketNum();
 createBasketContent();
 createFavContent();
@@ -233,7 +254,4 @@ Still need to work on remove product button
 Start on payment page
 Add more lego bricks
 */
-
 export { addCartNumbers, addSetItems, addTotalCost, createBasketContent };
-
-// Push cart items into an array and store it as an array of objects

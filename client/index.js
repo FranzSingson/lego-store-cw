@@ -1,33 +1,29 @@
 // import { handle } from 'express/lib/application';
-import { bricks } from './bricks.mjs';
+// import { bricks } from './bricks.mjs';
 
-// let bricks;
-const maxProducts = bricks.length + 1;
-let bricksStock = 0;
+async function loadBricks() {
+  const response = await fetch('/bricks')
+  if (response.ok) {
+    const data = await response.json();
+    // bricks = data;
+    // console.log(bricks.length)
+    console.log(data);
+    const maxProducts = data.length + 1;
+    let bricksStock = 0;
+    makeGrid(maxProducts);
+    divideBoxes();
+    insertProduct(data, bricksStock);
+    // return data;
+  } else {
+    console.log("not working")
+  }
+  // return bricks;
+}
 
-// async function loadBricks() {
-//   const response = await fetch('/bricks')
-//   if (response.ok) {
-//     const data = await response.json();
-//     bricks = data;
-//     console.log(bricks.length)
-//     console.log(bricks)
-//     return data;
-//   } else {
-//     console.log("not working")
-//   }
-// return bricks;
-// }
-
-// console.log(bricks)
-// const maxProducts = bricks.length + 1;
-// let bricksStock = 0;
-
-
-function makeGrid() {
+function makeGrid(maxProducts) {
   for (let i = 1; i < maxProducts; i++) {
     const newSection = document.createElement('div');
-    newSection.id = `product${i}`;
+    newSection.id = `Item${i}`;
     newSection.className = 'allBoxes-class';
 
     // const newPara = document.createElement('p');
@@ -60,34 +56,34 @@ function divideBoxes() {
   }
 }
 
-function insertProduct() {
+function insertProduct(dataArray, brickIndex) {
   const allBoxes = document.querySelectorAll('.allBoxes-class');
   for (const allBox of allBoxes) {
     // insert image on each picDiv-class
     const picDiv = allBox.querySelector('.picDiv-class');
     const imgElem = document.createElement('img');
-    imgElem.src = bricks[bricksStock].imgSrc;
-    imgElem.alt = `Image for brick${bricksStock}`;
+    imgElem.src = dataArray[brickIndex].imgSrc;
+    imgElem.alt = `Image for brick${brickIndex}`;
     picDiv.appendChild(imgElem);
     imgElem.setAttribute('style', 'height: 80%; display: block; margin-left: auto; margin-right: auto; ');
 
     const descDiv = allBox.querySelector('.descDiv-class');
-    descDiv.id = `descDiv-id${bricks[bricksStock].id}`;
+    descDiv.id = `descDiv-id${dataArray[brickIndex].id}`;
     const newIDElem = document.createElement('p');
-    newIDElem.id = `${bricks[bricksStock].id}`;
-    newIDElem.textContent = `${'ID: ' + bricks[bricksStock].id}`;
+    newIDElem.id = `${dataArray[brickIndex].id}`;
+    newIDElem.textContent = `${'ID: ' + dataArray[brickIndex].id}`;
 
     const newColElem = document.createElement('p');
-    newColElem.textContent = `${'Colour: ' + bricks[bricksStock].colour}`;
+    newColElem.textContent = `${'Colour: ' + dataArray[brickIndex].colour}`;
 
     const newPriceElem = document.createElement('p');
-    newPriceElem.textContent = `${'Price: £' + bricks[bricksStock].price}`;
+    newPriceElem.textContent = `${'Price: £' + dataArray[brickIndex].price}`;
 
-    const addToBasketButton = createButton(bricks[bricksStock].id);
-    const addToFavButton = createFavouritesBtn(bricks[bricksStock].id);
+    const addToBasketButton = createButton(dataArray[brickIndex].id);
+    const addToFavButton = createFavouritesBtn(dataArray[brickIndex].id);
     descDiv.append(newIDElem, newColElem, newPriceElem, addToBasketButton, addToFavButton);
 
-    bricksStock++;
+    brickIndex++;
   }
 }
 
@@ -109,7 +105,7 @@ function createFavouritesBtn(id) {
   return makeFavBtn;
 }
 
-makeGrid();
-divideBoxes();
-insertProduct();
-// window.addEventListener('load', loadBricks);
+// makeGrid();
+// divideBoxes();
+// insertProduct();
+loadBricks();
