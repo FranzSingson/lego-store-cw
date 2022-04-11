@@ -1,0 +1,36 @@
+
+#page-title {
+    color: white;
+    text-align: center;
+    background-color: #E3000B;
+    margin: 0;
+    padding: 15px;
+}
+
+
+h2,h3 {
+    text-align: center;
+    /* padding: auto; */
+    /* width: auto; */
+}
+
+#cvv {
+    width: 3rem;
+}
+.payment-form {
+    border: 1px black solid;
+    /* font-family: arial; */
+    /* font-size: 24px; */
+    margin: auto;
+    padding: 0 0 1rem 0;
+    width: 25rem;
+    /* height: 200px; */
+    /* outline: dashed 1px black; */
+    background-color: pink;
+}
+
+.payment-form > input, label {
+    margin: 1rem 0rem 0rem 1rem;
+    /* outline: black 1px solid; */
+    /* margin-left: 2rem; */
+}

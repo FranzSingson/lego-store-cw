@@ -1,7 +1,7 @@
 // Auth0
 import authConfig from './auth-config.js';
 import express from 'express';
-import { bricks } from '../client/bricks.mjs';
+import { bricks } from './bricks.mjs';
 import path from 'path';
 import url from 'url';
 

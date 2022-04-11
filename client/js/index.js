@@ -7,17 +7,15 @@ async function loadBricks() {
     const data = await response.json();
     // bricks = data;
     // console.log(bricks.length)
-    console.log(data);
+    // console.log(data);
     const maxProducts = data.length + 1;
     let bricksStock = 0;
     makeGrid(maxProducts);
     divideBoxes();
     insertProduct(data, bricksStock);
-    // return data;
   } else {
     console.log("not working")
   }
-  // return bricks;
 }
 
 function makeGrid(maxProducts) {
@@ -26,13 +24,8 @@ function makeGrid(maxProducts) {
     newSection.id = `Item${i}`;
     newSection.className = 'allBoxes-class';
 
-    // const newPara = document.createElement('p');
-    // newPara.textContent = 'Div box'
-    // newSection.appendChild(newPara);
-
     const elemMain = document.getElementById('main-board');
     elemMain.appendChild(newSection);
-    console.log('MakeGrid is working');
   }
 }
 
@@ -105,7 +98,4 @@ function createFavouritesBtn(id) {
   return makeFavBtn;
 }
 
-// makeGrid();
-// divideBoxes();
-// insertProduct();
 loadBricks();

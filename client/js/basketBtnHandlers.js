@@ -2,15 +2,16 @@
 import { createBasketContent } from './storage.js';
 
 async function loadBricks() {
-  const response = await fetch('/bricks')
+  const response = await fetch('/bricks');
   if (response.ok) {
     const data = await response.json();
     quantityButtons(data);
   } else {
-    console.log("not working")
+    console.log('not working');
   }
 }
 
+// The only way to add/sub product quantity is in the basket.html page
 function quantityButtons(dataArray) {
   // Plus button
   const plusBtn = document.querySelectorAll('.plus-btn');
@@ -18,8 +19,6 @@ function quantityButtons(dataArray) {
     plusBtn[i].addEventListener('click', () => {
       for (const brick of dataArray) {
         if (brick.name === plusBtn[i].parentElement.id) {
-          console.log(plusBtn[i].parentElement.id)
-          console.log(brick.name)
           addOne(brick, plusBtn[i].parentElement.id);
           updateBasketPageTotal();
         }
@@ -31,7 +30,6 @@ function quantityButtons(dataArray) {
   const subtractBtn = document.querySelectorAll('.subtract-btn');
   for (let i = 0; i < subtractBtn.length; i++) {
     subtractBtn[i].addEventListener('click', () => {
-      // console.log(bricks[i]);
       for (const brick of dataArray) {
         if (brick.name === subtractBtn[i].parentElement.id) {
           subOne(brick, subtractBtn[i].parentElement.id);
@@ -146,7 +144,14 @@ function removeFromLocalStorage(id) {
 function clearBasket() {
   const clearBasketBtn = document.querySelector('.clear-basket-btn');
   clearBasketBtn.addEventListener('click', () => {
-    localStorage.clear();
+    // const favItems = JSON.parse(localStorage.getItem('productsInFav'));
+    // const favQty = JSON.parse(localStorage.getItem('favQty'));
+    // localStorage.clear();
+    // localStorage.setItem('productsInFav', JSON.stringify(favItems));
+    // localStorage.setItem('favQty', favQty);
+    localStorage.removeItem('productsInCart')
+    localStorage.removeItem('totalCost')
+    localStorage.removeItem('cartQty')
     makeEmptyBasketContent();
   });
 }
@@ -175,8 +180,3 @@ loadBricks();
 removeProduct();
 clearBasket();
 nextBtnHandler();
-
-// Issues atm, when I added brick0 in the cart, and click add to cart on brick0 again, it will be added, find solution for this
-// It will only be fixed once a new item is selected and therefore replacing the last item in the array
-// cartQty is also bugged when you add to basket a brick twice.
-// Note for future self, when inCart is 0, call fucntion remove product.

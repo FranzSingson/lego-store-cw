@@ -2,24 +2,22 @@
 <html lang="en">
 <link rel="stylesheet" href="style.css">
 <script src="https://cdn.auth0.com/js/auth0-spa-js/1.13/auth0-spa-js.production.js" async defer></script>
-<script type="module" src="auth0.js" async defer></script>
+<script type="module" src="./js/auth0.js" async defer></script>
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lego Store</title>
-
-    <style></style>
 </head>
 
 <h1>Lego Store</h1>
 
-<header class="topnav">
+<header class="nav-top">
     <a class="home active" href="index.html">Home</a>
     <a class="basket" href="basket.html">Basket (<span>0</span>)</a>
     <a class="favourites" href="favourites.html">Favourites (<span>0</span>)</a>
-    <a href="about.html">About</a>
+    <a class="about" href="about.html">About</a>
 </header>
 
 <div class = "SignInContainer">
@@ -38,7 +36,7 @@
 
 </body>
 
-<script src="index.js" type="module"></script>
-<script src="storage.js" type="module"></script>
+<script src="./js/index.js" type="module"></script>
+<script src="./js/storage.js" type="module"></script>
 
 </html>

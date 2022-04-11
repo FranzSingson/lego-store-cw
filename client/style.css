@@ -1,11 +1,11 @@
 /* Add a black background color to the top navigation */
-.topnav {
+.nav-top {
     background-color: grey;
     overflow: hidden;
   }
   
   /* Style the links inside the navigation bar */
-  .topnav a {
+  .nav-top a {
     float: left;
     color: #f2f2f2;
     text-align: center;
@@ -15,15 +15,16 @@
   }
   
   /* Change the color of links on hover */
-  .topnav a:hover {
-    background-color: #ddd;
+  .nav-top a:hover {
+    background-color: #E3000B;
     color: black;
   }
   
   /* Add a color to the active/current link */
-  .topnav a.active {
-    background-color: green;
-    color: white;
+  .nav-top a.active {
+    background-color: yellow;
+    color: black;
+
   }
 
   #main-board {
@@ -34,7 +35,11 @@
 }
 
 h1 {
+  color: white;
   text-align: center;
+  background-color: #E3000B;
+  margin: 0;
+  padding: 15px;
 }
 
 
@@ -50,9 +55,10 @@ h1 {
 }
 
 .SignInContainer {
-    height: auto;
-    width: auto;
+    /* height: auto; */
+    /* width: auto; */
     border: 1px  solid black;
+    margin: 0%;
     background-color: cyan;
 }
 
