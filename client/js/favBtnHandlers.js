@@ -40,7 +40,7 @@ function removeFav() {
 
 function removeFromLocalStorage(id) {
   const favItems = JSON.parse(localStorage.getItem('productsInFav'));
-
+  const favQty = JSON.parse(localStorage.getItem('favQty'));
 
   let tempArr = [];
   tempArr = favItems;
@@ -54,6 +54,8 @@ function removeFromLocalStorage(id) {
         tempArr.splice([i], 1);
         localStorage.setItem('productsInFav', JSON.stringify(tempArr));
       }
+      // const favQty = JSON.parse(localStorage.getItem('favQty'));
+      localStorage.setItem('favQty', favQty - 1);
     }
   }
   location.reload();

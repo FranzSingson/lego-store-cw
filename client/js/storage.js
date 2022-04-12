@@ -19,8 +19,7 @@ async function loadBricks() {
       favBtn[i].addEventListener('click', () => {
         addFavSetItems(data[i]);
         addFavCartNumbers(data[i]);
-        addFavTotalCost(data[i]);
-        // updateBasketNum();
+        // addFavTotalCost(data[i]);
       });
     }
   } else {

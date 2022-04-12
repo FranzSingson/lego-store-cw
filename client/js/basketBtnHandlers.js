@@ -119,6 +119,7 @@ function removeProduct() {
 function removeFromLocalStorage(id) {
   const basketItems = JSON.parse(localStorage.getItem('productsInCart'));
   const totalCost = JSON.parse(localStorage.getItem('totalCost'));
+  const cartQty = JSON.parse(localStorage.getItem('cartQty'));
 
   console.log(basketItems);
 
@@ -127,7 +128,9 @@ function removeFromLocalStorage(id) {
   for (let i = 0; i < tempArr.length; i++) {
     if (tempArr[i].name === id) {
       if (tempArr.length === 1) { // When the product is the last item in the basket and user presses remove product button)
-        localStorage.clear();
+        localStorage.removeItem('productsInCart')
+        localStorage.removeItem('totalCost')
+        localStorage.removeItem('cartQty')
         makeEmptyBasketContent();
       } else {
         console.log(basketItems[i]);
@@ -135,20 +138,18 @@ function removeFromLocalStorage(id) {
         tempArr.splice([i], 1);
         localStorage.setItem('totalCost', totalCost - qtyXprice);
         localStorage.setItem('productsInCart', JSON.stringify(tempArr));
+        localStorage.setItem('cartQty', cartQty - 1);
       }
     }
   }
   location.reload();
 }
 
+
+
 function clearBasket() {
   const clearBasketBtn = document.querySelector('.clear-basket-btn');
   clearBasketBtn.addEventListener('click', () => {
-    // const favItems = JSON.parse(localStorage.getItem('productsInFav'));
-    // const favQty = JSON.parse(localStorage.getItem('favQty'));
-    // localStorage.clear();
-    // localStorage.setItem('productsInFav', JSON.stringify(favItems));
-    // localStorage.setItem('favQty', favQty);
     localStorage.removeItem('productsInCart')
     localStorage.removeItem('totalCost')
     localStorage.removeItem('cartQty')
@@ -175,6 +176,8 @@ function nextBtnHandler() {
     location.href = './payment.html';
   });
 }
+
+
 
 loadBricks();
 removeProduct();

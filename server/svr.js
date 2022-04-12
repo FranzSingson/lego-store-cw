@@ -23,13 +23,12 @@ app.use(express.static('client'));
 
 
 app.get('*', function (request, response) {
-  response.send('This is not the homepage');
+  response.status(404).send('Error 404: Not Found');
 });
 
 app.listen(port, function () {
   console.log('Server is up at ', port);
 });
-
 
 
 // Note to self: To start this with "npm start" in the terminal
