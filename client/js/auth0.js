@@ -1,4 +1,4 @@
-async function fetchAuthConfig() {
+export async function fetchAuthConfig() {
   const response = await fetch('/auth-config');
   if (response.ok) {
     return response.json();
@@ -28,10 +28,36 @@ async function updateAuthUI() {
 
   if (isAuthenticated) {
     const user = await auth0.getUser();
-    const el = document.getElementById('greeting');
-    el.textContent = `Hello ${user.name} (${user.email})!`;
+
+    // When the user is in index.html
+    const mainBoard = document.querySelector("#main-board");
+    const paymentBody = document.querySelector("#confirmation-body");
+    const products = document.querySelector(".product");
+    if (mainBoard !== null) {
+      const elem1 = document.getElementById('greeting');
+      elem1.textContent = `Hello ${user.name} (${user.email})!`;
+
+      // When user is logged in, the button is clickable
+      const addToBktBtns = document.querySelectorAll(".addToBasketButton-class");
+      for (const btns of addToBktBtns) {
+        btns.disabled = false;
+      }
+    }
+    // When the user is in payment.html
+    else if (paymentBody !== null) {
+      const elem2 = document.querySelector('#confirmation-msg');
+      elem2.textContent = `Thank you for your purchase ${user.name}!`;
+      const elem3 = document.querySelector('#receipt-msg');
+      elem3.textContent = `Your e-receipt has been sent to ${user.email}.`;
+    } 
+    // When the user is in basket.html
+    else if (products !== null) {
+      const payBtn = document.querySelector("#pay-basket-btn")
+      payBtn.disabled = false;
+      const elem1 = document.getElementById('greeting');
+      elem1.textContent = `Hello ${user.name} (${user.email})!`;
+    }
   }
-  console.log(isAuthenticated)
 }
 
 async function login() {

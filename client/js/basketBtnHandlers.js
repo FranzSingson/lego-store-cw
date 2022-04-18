@@ -128,9 +128,9 @@ function removeFromLocalStorage(id) {
   for (let i = 0; i < tempArr.length; i++) {
     if (tempArr[i].name === id) {
       if (tempArr.length === 1) { // When the product is the last item in the basket and user presses remove product button)
-        localStorage.removeItem('productsInCart')
-        localStorage.removeItem('totalCost')
-        localStorage.removeItem('cartQty')
+        localStorage.removeItem('productsInCart');
+        localStorage.removeItem('totalCost');
+        localStorage.removeItem('cartQty');
         makeEmptyBasketContent();
       } else {
         console.log(basketItems[i]);
@@ -146,13 +146,12 @@ function removeFromLocalStorage(id) {
 }
 
 
-
 function clearBasket() {
   const clearBasketBtn = document.querySelector('.clear-basket-btn');
   clearBasketBtn.addEventListener('click', () => {
-    localStorage.removeItem('productsInCart')
-    localStorage.removeItem('totalCost')
-    localStorage.removeItem('cartQty')
+    localStorage.removeItem('productsInCart');
+    localStorage.removeItem('totalCost');
+    localStorage.removeItem('cartQty');
     makeEmptyBasketContent();
   });
 }
@@ -172,11 +171,10 @@ function makeEmptyBasketContent() {
 }
 
 function nextBtnHandler() {
-  document.querySelector('.next-basket-btn').addEventListener('click', () => {
+  document.querySelector('#pay-basket-btn').addEventListener('click', () => {
     location.href = './payment.html';
   });
 }
-
 
 
 loadBricks();

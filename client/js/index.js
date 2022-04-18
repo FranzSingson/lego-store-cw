@@ -1,20 +1,22 @@
 // import { handle } from 'express/lib/application';
 // import { bricks } from './bricks.mjs';
+// import { fetchAuthConfig } from './auth0.js';
+
 
 async function loadBricks() {
-  const response = await fetch('/bricks')
+  const response = await fetch('/bricks');
   if (response.ok) {
     const data = await response.json();
     // bricks = data;
     // console.log(bricks.length)
     // console.log(data);
     const maxProducts = data.length + 1;
-    let bricksStock = 0;
+    const bricksStock = 0;
     makeGrid(maxProducts);
     divideBoxes();
     insertProduct(data, bricksStock);
   } else {
-    console.log("not working")
+    console.log('not working');
   }
 }
 
@@ -53,6 +55,7 @@ function insertProduct(dataArray, brickIndex) {
   const allBoxes = document.querySelectorAll('.allBoxes-class');
   for (const allBox of allBoxes) {
     // insert image on each picDiv-class
+    // if (dataArray[brickIndex].type === 'brick') {
     const picDiv = allBox.querySelector('.picDiv-class');
     const imgElem = document.createElement('img');
     imgElem.src = dataArray[brickIndex].imgSrc;
@@ -77,6 +80,7 @@ function insertProduct(dataArray, brickIndex) {
     descDiv.append(newIDElem, newColElem, newPriceElem, addToBasketButton, addToFavButton);
 
     brickIndex++;
+    // }
   }
 }
 
@@ -86,6 +90,7 @@ function createButton(id) {
   makeBtn.type = 'button';
   makeBtn.dataset.id = id;
   makeBtn.className = 'addToBasketButton-class';
+  makeBtn.disabled = true;
   return makeBtn;
 }
 

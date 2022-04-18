@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <link rel="stylesheet" href="style.css">
+<script src="https://cdn.auth0.com/js/auth0-spa-js/1.13/auth0-spa-js.production.js" async defer></script>
+<script type="module" src="./js/auth0.js" async defer></script>
 
 <head>
     <meta charset="UTF-8">
@@ -18,6 +20,11 @@
     <a class="basket active" href="basket.html">Basket (<span>0</span>)</a>
     <a class="favourites" href="favourites.html">Favourites (<span>0</span>)</a>
     <a class="about" href="about.html">About</a>
+    <div id="login-div">
+        <p id="greeting">Hello user!</p>
+        <button id="login" disabled="true">Log in</button>
+        <button id="logout" disabled="true">Log out</button>
+    </div>
 </header>
 
 <h2>This is the Basket page</h2>

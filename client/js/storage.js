@@ -1,6 +1,6 @@
 
 async function loadBricks() {
-  const response = await fetch('/bricks')
+  const response = await fetch('/bricks');
   if (response.ok) {
     const data = await response.json();
     const carts = document.querySelectorAll('.addToBasketButton-class');
@@ -23,7 +23,7 @@ async function loadBricks() {
       });
     }
   } else {
-    console.log("not working")
+    console.log('not working');
   }
 }
 
@@ -145,20 +145,6 @@ function addFavCartNumbers() {
   }
 }
 
-function addFavTotalCost() {
-  const basketItems = JSON.parse(localStorage.getItem('productsInFav'));
-
-  if (basketItems != null) {
-    let totalCost = 0;
-    for (const basketItem of basketItems) {
-      totalCost += basketItem.price;
-      localStorage.setItem('favTotalCost', totalCost);
-    }
-  } else {
-    localStorage.setItem('favTotalCost', basketItems[0].price);
-  }
-}
-
 function duplicateCheckFav(array) {
   const result = array.filter(function (e) {
     const key = Object.keys(e).map(k => e[k]).join('|');
@@ -189,7 +175,7 @@ function createBasketContent() {
     <div class="basketTotalContainer">
         <h4 class="basketTotal">Your Total is: £${cartCost}</h4>
         <button class="clear-basket-btn">Clear Basket</button>
-        <button class="next-basket-btn">Next</button>
+        <button id="pay-basket-btn" disabled = "true">Pay</button>
     </div>
     `;
     // Appends new products to the page

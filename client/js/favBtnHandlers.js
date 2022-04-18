@@ -47,7 +47,8 @@ function removeFromLocalStorage(id) {
   for (let i = 0; i < tempArr.length; i++) {
     if (tempArr[i].name === id) {
       if (tempArr.length === 1) { // When the product is the last item in the basket and user presses remove product button)
-        localStorage.clear();
+        localStorage.removeItem("productsInFav")
+        localStorage.removeItem("favQty")
         makeEmptyFavContent();
       } else {
         console.log(favItems[i]);

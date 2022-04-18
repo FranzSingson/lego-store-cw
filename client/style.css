@@ -54,6 +54,11 @@ h1 {
     /* margin: 5rem 5rem 5rem 5rem; */
 }
 
+#login-div {
+  text-align:right; 
+  margin:0px auto 0px auto;
+}
+
 .SignInContainer {
     /* height: auto; */
     /* width: auto; */
