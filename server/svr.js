@@ -11,7 +11,8 @@ import { bricks } from './bricks.mjs';
 const app = express();
 const port = 8080;
 
-// // Database stuff underneath
+// Database stuff underneath
+
 // async function getProducts(req, res) {
 //   res.json(await mb.listProducts());
 // }
