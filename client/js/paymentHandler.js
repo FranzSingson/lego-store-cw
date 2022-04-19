@@ -29,25 +29,28 @@ function displayTotal() {
 }
 
 function makeBackToHomeBtn() {
+  const newDiv = document.createElement('div');
+  newDiv.id = 'btn-div';
+
   const newBtn = document.createElement('button');
   newBtn.id = 'back-to-home';
   newBtn.type = 'button';
   newBtn.textContent = 'Back to home';
   newBtn.addEventListener('click', () => {
     // clearBasket();
-    console.log("back")
+    console.log('back');
     localStorage.removeItem('productsInCart');
     localStorage.removeItem('totalCost');
     localStorage.removeItem('cartQty');
     location.href = './index.html';
   });
 
+  newDiv.append(newBtn);
   const parentElem = document.querySelector('#confirmation-body');
-  parentElem.append(newBtn);
+  parentElem.append(newDiv);
 }
 
 
 loadBricks();
 
-// We want to display the total of the basket here
 console.log('we are in paymenthandler');

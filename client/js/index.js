@@ -90,7 +90,7 @@ function createButton(id) {
   makeBtn.type = 'button';
   makeBtn.dataset.id = id;
   makeBtn.className = 'addToBasketButton-class';
-  makeBtn.disabled = true;
+  // makeBtn.disabled = true;
   return makeBtn;
 }
 

@@ -33,15 +33,17 @@ async function updateAuthUI() {
     const mainBoard = document.querySelector("#main-board");
     const paymentBody = document.querySelector("#confirmation-body");
     const products = document.querySelector(".product");
+
+    // When user is is the index.html
     if (mainBoard !== null) {
       const elem1 = document.getElementById('greeting');
       elem1.textContent = `Hello ${user.name} (${user.email})!`;
 
       // When user is logged in, the button is clickable
-      const addToBktBtns = document.querySelectorAll(".addToBasketButton-class");
-      for (const btns of addToBktBtns) {
-        btns.disabled = false;
-      }
+      // const addToBktBtns = document.querySelectorAll(".addToBasketButton-class");
+      // for (const btns of addToBktBtns) {
+      //   btns.disabled = false;
+      // }
     }
     // When the user is in payment.html
     else if (paymentBody !== null) {
