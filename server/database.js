@@ -2,9 +2,13 @@
 // import { open } from 'sqlite';
 import * as sqlite from 'sqlite';
 
+// const sqlite3 = require('sqlite3');
+// const sqlite = require('sqlite');
+// import sqlite from 'sqlite';
+
 async function init() {
   const db = await sqlite.open('./database.sqlite', { verbose: true });
-  await db.migrate({ migrationsPath: './migrations-sqlite' });
+  await db.migrate({ migrationsPath: './databaseInit' });
   return db;
 }
 
