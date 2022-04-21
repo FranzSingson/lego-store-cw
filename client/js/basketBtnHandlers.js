@@ -48,16 +48,18 @@ function addOne(item, elemId) {
   tempArr = basketItems;
   for (let i = 0; i < tempArr.length; i++) {
     if (tempArr[i].name === item.name) {
-      // tempArr[i].inCart += 1;
-      tempArr[i].inCart += 1;
-      localStorage.setItem('totalCost', totalCost + item.price);
 
-      // This will update the QTY span
-      const qtySpan = document.querySelector(`#${elemId} > .qty-span`);
-      qtySpan.textContent = tempArr[i].inCart;
-      // This will update the qty x price span
-      const qtyTimesPrice = document.querySelector(`#${elemId} > .qty-x-price`);
-      qtyTimesPrice.textContent = `£${tempArr[i].inCart * tempArr[i].price}`;
+      // if (tempArr[i].stock > tempArr[i].inCart) {
+        tempArr[i].inCart += 1;
+        localStorage.setItem('totalCost', totalCost + item.price);
+
+        // This will update the QTY span
+        const qtySpan = document.querySelector(`#${elemId} > .qty-span`);
+        qtySpan.textContent = tempArr[i].inCart;
+        // This will update the qty x price span
+        const qtyTimesPrice = document.querySelector(`#${elemId} > .qty-x-price`);
+        qtyTimesPrice.textContent = `£${tempArr[i].inCart * tempArr[i].price}`;
+      // } else { alert(`We only have ${tempArr[i].stock} ${tempArr[i].name} in stock sorry`) }
     }
   }
   localStorage.setItem('productsInCart', JSON.stringify(tempArr));

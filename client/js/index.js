@@ -15,6 +15,7 @@ async function loadBricks() {
     makeGrid(maxProducts);
     divideBoxes();
     insertProduct(data, bricksStock);
+    console.log(data)
   } else {
     console.log('not working');
   }
@@ -75,23 +76,37 @@ function insertProduct(dataArray, brickIndex) {
     const newPriceElem = document.createElement('p');
     newPriceElem.textContent = `${'Price: £' + dataArray[brickIndex].price}`;
 
-    const addToBasketButton = createButton(dataArray[brickIndex].id);
+
     const addToFavButton = createFavouritesBtn(dataArray[brickIndex].id);
-    descDiv.append(newIDElem, newColElem, newPriceElem, addToBasketButton, addToFavButton);
+
+    // If product stock is < 1, make button not clickable
+    if (dataArray[brickIndex].stock < 1) {
+      const addToBasketButton = createButton(dataArray[brickIndex].id, dataArray[brickIndex].stock);
+      descDiv.append(newIDElem, newColElem, newPriceElem, addToBasketButton, addToFavButton);
+    } else {
+      const addToBasketButton = createButton(dataArray[brickIndex].id);
+      descDiv.append(newIDElem, newColElem, newPriceElem, addToBasketButton, addToFavButton);
+    }
+    // const addToBasketButton = createButton(dataArray[brickIndex].id);
 
     brickIndex++;
     // }
   }
 }
 
-function createButton(id) {
+function createButton(id, stockQty) {
   const makeBtn = document.createElement('button');
   makeBtn.textContent = 'Add to basket';
   makeBtn.type = 'button';
   makeBtn.dataset.id = id;
   makeBtn.className = 'addToBasketButton-class';
-  // makeBtn.disabled = true;
-  return makeBtn;
+  if (stockQty < 1) {
+    makeBtn.disabled = true;
+    makeBtn.textContent = 'Out of stock';
+    return makeBtn
+  } else {
+    return makeBtn;
+  }
 }
 
 function createFavouritesBtn(id) {

@@ -5,21 +5,12 @@ async function loadBricks() {
   const response = await fetch('/bricks');
   if (response.ok) {
     const data = await response.json();
-    getCartItems(data);
+    updateStock(data)
     displayTotal();
     makeBackToHomeBtn();
   } else {
     console.log('not working');
   }
-}
-
-
-function getCartItems(cartArray) {
-  const cartItems = JSON.parse(localStorage.getItem('productsInCart'));
-  const totalCost = JSON.parse(localStorage.getItem('totalCost'));
-  console.log(cartArray);
-  console.log(cartItems);
-  console.log(totalCost);
 }
 
 function displayTotal() {
@@ -50,7 +41,17 @@ function makeBackToHomeBtn() {
   parentElem.append(newDiv);
 }
 
+function updateStock() {
+  const cartItems = JSON.parse(localStorage.getItem('productsInCart'));
+  // console.log(cartArray);
+  localStorage.setItem('productsBought', JSON.stringify(cartItems));
+  for (const cartItem of cartItems) {
+    console.log(cartItem.id, cartItem.inCart)
+    // updateDbStock(cartItem.id, cartItem.inCart);
+  }
+
+}
+
 
 loadBricks();
 
-console.log('we are in paymenthandler');
