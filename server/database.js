@@ -1,3 +1,5 @@
+/*
+
 // import { sqlite } from 'sqlite'
 // import { open } from 'sqlite';
 import * as sqlite from 'sqlite';
@@ -25,3 +27,23 @@ export async function findBrick(id) {
   const db = await dbConn;
   return db.get('SELECT * FROM products WHERE id = ?', id);
 }
+
+*/
+
+import sqlite3 from 'sqlite3'
+import { open } from 'sqlite'
+
+// this is a top-level await 
+(async () => {
+  // open the database
+  const db = await open({
+    filename: '/tmp/database.db',
+    driver: sqlite3.Database
+  })
+})()
+
+await db.exec('CREATE TABLE tbl (col TEXT)')
+await db.exec('INSERT INTO tbl VALUES ("test")')
+
+const result = await db.get('SELECT col FROM tbl WHERE col = ?', 'test')
+// { col: 'test' }

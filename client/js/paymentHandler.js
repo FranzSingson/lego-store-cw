@@ -25,7 +25,7 @@ function getCartItems(cartArray) {
 function displayTotal() {
   const totalCost = JSON.parse(localStorage.getItem('totalCost'));
   const h3Elem = document.querySelector('#basket-total');
-  h3Elem.textContent = `Your total is: £${totalCost}`;
+  h3Elem.textContent = `Total: £${totalCost}`;
 }
 
 function makeBackToHomeBtn() {
