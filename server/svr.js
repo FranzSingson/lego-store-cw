@@ -13,10 +13,44 @@ app.get('/auth-config', (req, res) => {
 
 app.use(express.static('client'));
 
-// List the products
+/* This is test data when using brick.mjs */
+// app.get('/bricks', (req, res) => {
+//   res.json(bricks);
+// });
+
+/* List the products */
+// async function getProducts(req, res) {
+//   res.json(await mb.listProducts());
+// }
+
+// async function getOneProduct(req, res) {
+//   res.json(await mb.findProduct(req.params.id));
+// }
+
 async function getProducts(req, res) {
-  res.json(await mb.listProducts());
+  const result = await mb.listProducts();
+  if (!result) {
+    res.status(404).send('No match for that ID.');
+    return;
+  }
+  res.json(result);
 }
+
+async function getOneProduct(req, res) {
+  const result = await mb.findProduct(req.params.id);
+  if (!result) {
+    res.status(404).send('No match for that ID.');
+    return;
+  }
+  res.json(result);
+}
+
+
+async function getOrderedItem(req, res) {
+  const message = await mb.updateStock(req.body.id, req.body.inCart);
+  res.json(message);
+}
+
 
 // From Stage simple board stage8
 function asyncWrap(f) {
@@ -27,6 +61,9 @@ function asyncWrap(f) {
 }
 
 app.get('/bricks', asyncWrap(getProducts));
+app.get('/bricks/:id', asyncWrap(getOneProduct));
+app.put('/bricks/bought/:id', express.json(), asyncWrap(getOrderedItem));
+
 
 app.get('*', function (request, response) {
   response.status(404).send('Error 404: Not Found');

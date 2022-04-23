@@ -170,27 +170,61 @@ function createBasketContent() {
   if (basketItems && productContainer) {
     // Empty the page first
     productContainer.innerHTML = '';
+
     // After being empty, create the elements
-    productContainer.innerHTML += `
-    <div class="basketTotalContainer">
-        <h4 class="basketTotal">Your Total is: £${cartCost}</h4>
-        <button class="clear-basket-btn">Clear Basket</button>
-        <button id="pay-basket-btn" disabled = "true">Pay</button>
-    </div>
-    `;
+    const newDiv = document.createElement('div');
+    newDiv.className = 'basketTotalContainer';
+    const newh4 = document.createElement('h4');
+    newh4.className = 'basketTotal';
+    newh4.textContent = `Your Total is: £${cartCost}`;
+    const clearBtn = document.createElement('button');
+    clearBtn.className = 'clear-basket-btn';
+    clearBtn.textContent = 'Clear Basket';
+    const payBtn = document.createElement('button');
+    payBtn.id = 'pay-basket-btn';
+    payBtn.textContent = 'Pay';
+    payBtn.disabled = true;
+    newDiv.append(newh4, clearBtn, payBtn);
+    productContainer.append(newDiv);
+
     // Appends new products to the page
     Object.values(basketItems).map(lego => {
-      productContainer.innerHTML += `
-        <div class="product" id="${lego.name}" >
-        <span>${lego.name} for £${lego.price}</span>
-        <img style = "height: 25vh;" src="${lego.imgSrc}">
-        <button class="subtract-btn" type="button">-</button>
-        <span class="qty-span">${lego.inCart}</span>
-        <button class="plus-btn" type="button">+</button>
-        <button class="remove-btn" type="button">Remove Product</button>
-        <span class="qty-x-price">£${lego.inCart * lego.price}</span>
-        </div>
-        `;
+      const parentDiv = document.createElement('div');
+      parentDiv.className = 'product';
+      parentDiv.id = `${lego.name}`;
+
+      const spanName = document.createElement('span');
+      spanName.textContent = `${lego.name} for £${lego.price}`;
+
+      const imgElem = document.createElement('img');
+      imgElem.src = `${lego.imgSrc}`;
+      imgElem.style = 'height: 25vh;';
+
+      const subBtn = document.createElement('button');
+      subBtn.className = 'subtract-btn';
+      subBtn.type = 'button';
+      subBtn.textContent = '-';
+
+      const spanQty = document.createElement('span');
+      spanQty.className = 'qty-span';
+      spanQty.textContent = `${lego.inCart}`;
+
+      const addBtn = document.createElement('button');
+      addBtn.className = 'plus-btn';
+      addBtn.type = 'button';
+      addBtn.textContent = '+';
+
+      const removeBtn = document.createElement('button');
+      removeBtn.className = 'remove-btn';
+      removeBtn.type = 'button';
+      removeBtn.textContent = 'Remove product';
+
+      const spanQtyXPrice = document.createElement('span');
+      spanQtyXPrice.className = 'qty-x-price';
+      spanQtyXPrice.textContent = `£${lego.inCart * lego.price}`;
+
+      parentDiv.append(spanName, imgElem, subBtn, spanQty, addBtn, removeBtn, spanQtyXPrice);
+      productContainer.append(parentDiv);
     });
   }
 }
@@ -204,21 +238,36 @@ function createFavContent() {
     // Empty the page first
     productContainer.innerHTML = '';
     // After being empty, create the elements
-    productContainer.innerHTML += `
-    <div class="favTotalContainer">
-        <button class="clear-fav-btn">Clear Favourites</button>
-    </div>
-    `;
+    const newDiv = document.createElement('div');
+    newDiv.className = "favTotalContainer";
+
+    const clearFavBtn = document.createElement("button")
+    clearFavBtn.className = "clear-fav-btn";
+    clearFavBtn.textContent = 'Clear Favourites';
+    newDiv.append(clearFavBtn);
+    productContainer.append(newDiv)
+
     // Appends new products to the page
     Object.values(favItems).map(lego => {
-      productContainer.innerHTML += `
-        <div class="product" id="${lego.name}" >
-        <span>${lego.name} for £${lego.price}</span>
-        <img style = "height: 25vh;" src="${lego.imgSrc}">
-        <button class="fav-to-basket" type="button">Add to basket</button>
-        <button class="remove-fav-btn" type="button">Remove from Favourites</button>
-        </div>
-        `;
+      const parentDiv = document.createElement("div")
+      parentDiv.className = "product"
+      parentDiv.id = `${lego.name}`;
+
+      const newSpan = document.createElement('span')
+      newSpan.textContent = `${lego.name} for £${lego.price}`;
+
+      const imgElem = document.createElement("img")
+      imgElem.src = `${lego.imgSrc}`;
+      imgElem.alt = `This is an image ${lego.name}`;
+      imgElem.style = "height: 25vh;"
+
+      const removeFavbtn = document.createElement("button")
+      removeFavbtn.type = "button";
+      removeFavbtn.className = "remove-fav-btn";
+      removeFavbtn.textContent = "Remove from favourites"
+
+      parentDiv.append(newSpan, imgElem, removeFavbtn)
+      productContainer.append(parentDiv)
     });
   }
 }

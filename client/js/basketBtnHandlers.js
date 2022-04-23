@@ -48,8 +48,7 @@ function addOne(item, elemId) {
   tempArr = basketItems;
   for (let i = 0; i < tempArr.length; i++) {
     if (tempArr[i].name === item.name) {
-
-      // if (tempArr[i].stock > tempArr[i].inCart) {
+      if (tempArr[i].stock > tempArr[i].inCart) {
         tempArr[i].inCart += 1;
         localStorage.setItem('totalCost', totalCost + item.price);
 
@@ -59,7 +58,7 @@ function addOne(item, elemId) {
         // This will update the qty x price span
         const qtyTimesPrice = document.querySelector(`#${elemId} > .qty-x-price`);
         qtyTimesPrice.textContent = `£${tempArr[i].inCart * tempArr[i].price}`;
-      // } else { alert(`We only have ${tempArr[i].stock} ${tempArr[i].name} in stock sorry`) }
+      } else { alert(`We only have ${tempArr[i].stock} ${tempArr[i].name} in stock sorry`); }
     }
   }
   localStorage.setItem('productsInCart', JSON.stringify(tempArr));
@@ -147,7 +146,6 @@ function removeFromLocalStorage(id) {
   location.reload();
 }
 
-
 function clearBasket() {
   const clearBasketBtn = document.querySelector('.clear-basket-btn');
   clearBasketBtn.addEventListener('click', () => {
@@ -172,14 +170,27 @@ function makeEmptyBasketContent() {
   container.append(h3Elem);
 }
 
+function boughtItems() {
+  const boughtItems = JSON.parse(localStorage.getItem('productsInCart'));
+  localStorage.setItem('productsBought', JSON.stringify(boughtItems));
+  for (const item of boughtItems) {
+    console.log(item.id, item.inCart);
+  }
+}
+
 function nextBtnHandler() {
   document.querySelector('#pay-basket-btn').addEventListener('click', () => {
     location.href = './payment.html';
+    boughtItems();
   });
 }
 
 
-loadBricks();
-removeProduct();
-clearBasket();
-nextBtnHandler();
+function init() {
+  loadBricks();
+  removeProduct();
+  clearBasket();
+  nextBtnHandler();
+}
+
+window.onload(init());

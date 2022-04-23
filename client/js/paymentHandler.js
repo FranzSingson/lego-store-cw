@@ -5,9 +5,9 @@ async function loadBricks() {
   const response = await fetch('/bricks');
   if (response.ok) {
     const data = await response.json();
-    updateStock(data)
     displayTotal();
     makeBackToHomeBtn();
+    updateStock()
   } else {
     console.log('not working');
   }
@@ -41,16 +41,30 @@ function makeBackToHomeBtn() {
   parentElem.append(newDiv);
 }
 
-function updateStock() {
-  const cartItems = JSON.parse(localStorage.getItem('productsInCart'));
+async function updateStock() {
+  const boughtItems = JSON.parse(localStorage.getItem('productsBought'));
   // console.log(cartArray);
-  localStorage.setItem('productsBought', JSON.stringify(cartItems));
-  for (const cartItem of cartItems) {
+  localStorage.setItem('productsBought', JSON.stringify(boughtItems));
+  for (const cartItem of boughtItems) {
     console.log(cartItem.id, cartItem.inCart)
-    // updateDbStock(cartItem.id, cartItem.inCart);
-  }
+    const id = cartItem.id;
+    const payload = cartItem;
 
+    console.log('Payload', payload)
+    const response = await fetch(`/bricks/bought/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+
+    if (response.ok) {
+      const cart = await response.json();
+    } else {
+      console.log('failed to send product', response);
+    }
+  }
 }
+
 
 
 loadBricks();
