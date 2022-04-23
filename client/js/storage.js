@@ -199,6 +199,7 @@ function createBasketContent() {
       const imgElem = document.createElement('img');
       imgElem.src = `${lego.imgSrc}`;
       imgElem.style = 'height: 25vh;';
+      imgElem.alt = `Image of ${lego.name}`
 
       const subBtn = document.createElement('button');
       subBtn.className = 'subtract-btn';
@@ -258,7 +259,7 @@ function createFavContent() {
 
       const imgElem = document.createElement("img")
       imgElem.src = `${lego.imgSrc}`;
-      imgElem.alt = `This is an image ${lego.name}`;
+      imgElem.alt = `Image of ${lego.name}`;
       imgElem.style = "height: 25vh;"
 
       const removeFavbtn = document.createElement("button")

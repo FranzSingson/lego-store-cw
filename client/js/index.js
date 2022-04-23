@@ -60,7 +60,7 @@ function insertProduct(dataArray, brickIndex) {
     const picDiv = allBox.querySelector('.picDiv-class');
     const imgElem = document.createElement('img');
     imgElem.src = dataArray[brickIndex].imgSrc;
-    imgElem.alt = `Image for brick${brickIndex}`;
+    imgElem.alt = `Image for ${dataArray[brickIndex].name}`
     picDiv.appendChild(imgElem);
     imgElem.setAttribute('style', 'height: 80%; display: block; margin-left: auto; margin-right: auto; ');
 

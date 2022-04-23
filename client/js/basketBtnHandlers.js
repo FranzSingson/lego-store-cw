@@ -17,6 +17,7 @@ function quantityButtons(dataArray) {
   const plusBtn = document.querySelectorAll('.plus-btn');
   for (let i = 0; i < plusBtn.length; i++) {
     plusBtn[i].addEventListener('click', () => {
+      // console.log("licked")
       for (const brick of dataArray) {
         if (brick.name === plusBtn[i].parentElement.id) {
           addOne(brick, plusBtn[i].parentElement.id);
