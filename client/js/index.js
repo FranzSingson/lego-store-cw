@@ -66,9 +66,10 @@ function insertProduct(dataArray, brickIndex) {
 
     const descDiv = allBox.querySelector('.descDiv-class');
     descDiv.id = `descDiv-id${dataArray[brickIndex].id}`;
+    
     const newIDElem = document.createElement('p');
     newIDElem.id = `${dataArray[brickIndex].id}`;
-    newIDElem.textContent = `${'ID: ' + dataArray[brickIndex].id}`;
+    newIDElem.textContent = `${'ID: ' + dataArray[brickIndex].id}, ${'Name: ' + dataArray[brickIndex].name}`;
 
     const newColElem = document.createElement('p');
     newColElem.textContent = `${'Colour: ' + dataArray[brickIndex].colour}`;
@@ -76,16 +77,19 @@ function insertProduct(dataArray, brickIndex) {
     const newPriceElem = document.createElement('p');
     newPriceElem.textContent = `${'Price: £' + dataArray[brickIndex].price}`;
 
+    const stockElem = document.createElement('p');
+    stockElem.textContent = `${'Stock: ' + dataArray[brickIndex].stock}`;
+
 
     const addToFavButton = createFavouritesBtn(dataArray[brickIndex].id);
 
     // If product stock is < 1, make button not clickable
     if (dataArray[brickIndex].stock < 1) {
       const addToBasketButton = createButton(dataArray[brickIndex].id, dataArray[brickIndex].stock);
-      descDiv.append(newIDElem, newColElem, newPriceElem, addToBasketButton, addToFavButton);
+      descDiv.append(newIDElem, newColElem, newPriceElem, addToBasketButton, addToFavButton, stockElem);
     } else {
       const addToBasketButton = createButton(dataArray[brickIndex].id);
-      descDiv.append(newIDElem, newColElem, newPriceElem, addToBasketButton, addToFavButton);
+      descDiv.append(newIDElem, newColElem, newPriceElem, addToBasketButton, addToFavButton, stockElem);
     }
     // const addToBasketButton = createButton(dataArray[brickIndex].id);
 
@@ -99,7 +103,7 @@ function createButton(id, stockQty) {
   makeBtn.textContent = 'Add to basket';
   makeBtn.type = 'button';
   makeBtn.dataset.id = id;
-  makeBtn.className = 'addToBasketButton-class';
+  makeBtn.className = 'addToBasketButton-class plus-btn';
   if (stockQty < 1) {
     makeBtn.disabled = true;
     makeBtn.textContent = 'Out of stock';
