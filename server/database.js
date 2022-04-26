@@ -32,4 +32,3 @@ export async function updateStock(id, bought) {
   console.log(newStockNum);
   return db.run('UPDATE products SET stock = ? WHERE id = ?', newStockNum, id);
 }
-

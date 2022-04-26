@@ -8,13 +8,13 @@ async function loadBricks() {
 
     for (let i = 0; i < data.length; i++) {
       for (const btn of btns) {
-        btn.addEventListener("click", () => {
+        btn.addEventListener('click', () => {
           if (data[i].id == btn.parentElement.id) {
-            const legoIndex = btn.parentElement.id
-            addSetItems(data[legoIndex]);
+            const legoIndex = btn.parentElement.id;
+            // addSetItems(data[legoIndex]);
             // duplicateCheckCart()
           }
-        })
+        });
       }
     }
     console.log('working');
@@ -25,26 +25,29 @@ async function loadBricks() {
 
 function removeFav() {
   const removeBtn = document.querySelectorAll('.remove-fav-btn');
-  for (let i = 0; i < removeBtn.length; i++) {
-    const parentId = removeBtn[i].parentElement.id;
-    removeBtn[i].addEventListener('click', () => {
+  for (const btn of removeBtn) {
+    const parentId = btn.parentElement.id;
+    btn.addEventListener('click', () => {
       removeFromLocalStorage(parentId);
-      createBasketContent();
+      console.log(parentId);
+      // createBasketContent();
     });
   }
 }
 
-function removeFromLocalStorage(id) {
+function removeFromLocalStorage(itemId) {
   const favItems = JSON.parse(localStorage.getItem('productsInFav'));
   const favQty = JSON.parse(localStorage.getItem('favQty'));
 
+  console.log(favItems);
+  const productId = parseInt(itemId)
   let tempArr = [];
   tempArr = favItems;
   for (let i = 0; i < tempArr.length; i++) {
-    if (tempArr[i].name === id) {
+    if (tempArr[i].id === productId) {
       if (tempArr.length === 1) { // When the product is the last item in the basket and user presses remove product button)
-        localStorage.removeItem("productsInFav")
-        localStorage.removeItem("favQty")
+        localStorage.removeItem('productsInFav');
+        localStorage.removeItem('favQty');
         makeEmptyFavContent();
       } else {
         console.log(favItems[i]);
@@ -56,15 +59,15 @@ function removeFromLocalStorage(id) {
     }
   }
   location.reload();
-  console.log(favItems);
 }
+
 
 function clearFav() {
   const clearBasketBtn = document.querySelector('.clear-fav-btn');
   clearBasketBtn.addEventListener('click', () => {
-    localStorage.removeItem("productsInFav");
-    localStorage.removeItem("favQty");
-    localStorage.removeItem("favTotalCost");
+    localStorage.removeItem('productsInFav');
+    localStorage.removeItem('favQty');
+    localStorage.removeItem('favTotalCost');
     makeEmptyFavContent();
   });
 }
