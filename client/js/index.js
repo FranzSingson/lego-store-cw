@@ -1,15 +1,9 @@
-// import { handle } from 'express/lib/application';
-// import { bricks } from './bricks.mjs';
-// import { fetchAuthConfig } from './auth0.js';
 
 
 async function loadBricks() {
   const response = await fetch('/bricks');
   if (response.ok) {
     const data = await response.json();
-    // bricks = data;
-    // console.log(bricks.length)
-    // console.log(data);
     const maxProducts = data.length + 1;
     const bricksStock = 0;
     makeGrid(maxProducts);
@@ -98,7 +92,7 @@ function insertProduct(dataArray, brickIndex) {
   }
 }
 
-function createButton(id, stockQty) {
+export function createButton(id, stockQty) {
   const makeBtn = document.createElement('button');
   makeBtn.textContent = 'Add to basket';
   makeBtn.type = 'button';

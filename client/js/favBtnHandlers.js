@@ -1,26 +1,22 @@
-import { addSetItems, addCartNumbers, addTotalCost, updateBasketNum, createBasketContent } from './storage.js'
+import { addSetItems, createBasketContent, duplicateCheckCart } from './storage.js';
 
 async function loadBricks() {
   const response = await fetch('/bricks');
   if (response.ok) {
     const data = await response.json();
-    const btn = document.querySelectorAll('.fav-to-basket');
-    for (let i = 0; i < btn.length; i++) {
-      for (const item of data) {
-        if (item.name === btn[i].parentElement.id) {
-          btn[i].addEventListener('click', () => {
-            console.log(btn[i].parentElement.id);
-            console.log(item.name);
-            // addSetItems(data[i]);
-            // addCartNumbers(data[i]);
-            // addTotalCost(data[i]);
-            // updateBasketNum();
-          });
-        }
+    const btns = document.querySelectorAll('.add-cart-btn');
+
+    for (let i = 0; i < data.length; i++) {
+      for (const btn of btns) {
+        btn.addEventListener("click", () => {
+          if (data[i].id == btn.parentElement.id) {
+            const legoIndex = btn.parentElement.id
+            addSetItems(data[legoIndex]);
+            // duplicateCheckCart()
+          }
+        })
       }
-
     }
-
     console.log('working');
   } else {
     console.log('not working');

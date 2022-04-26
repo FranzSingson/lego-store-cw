@@ -1,3 +1,4 @@
+import { createButton } from './index.js';
 
 async function loadBricks() {
   const response = await fetch('/bricks');
@@ -9,7 +10,7 @@ async function loadBricks() {
         // console.log(bricks[i]);
         addSetItems(data[i]);
         addCartNumbers(data[i]);
-        addTotalCost(data[i]);
+        // addTotalCost(data[i]);
         updateBasketNum();
       });
     }
@@ -19,7 +20,6 @@ async function loadBricks() {
       favBtn[i].addEventListener('click', () => {
         addFavSetItems(data[i]);
         addFavCartNumbers(data[i]);
-        // addFavTotalCost(data[i]);
       });
     }
   } else {
@@ -43,6 +43,7 @@ function addSetItems(product) {
     tempArr.push(product);
     localStorage.setItem('productsInCart', JSON.stringify(tempArr));
   }
+  addTotalCost();
 }
 
 function addCartNumbers() {
@@ -67,7 +68,8 @@ function addTotalCost() {
   if (basketItems != null) {
     let totalCost = 0;
     for (const basketItem of basketItems) {
-      totalCost += basketItem.price;
+      const newPrice = basketItem.inCart * basketItem.price
+      totalCost += newPrice;
       localStorage.setItem('totalCost', totalCost);
     }
   } else {
@@ -99,7 +101,10 @@ function duplicateCheckCart(array) {
     }
   }, {});
   for (const basketItem of result) {
-    basketItem.inCart = 1;
+    if (basketItem.inCart ===  0) {
+      basketItem.inCart = 1;
+    } 
+      // basketItem.inCart = 1;
   }
   localStorage.setItem('productsInCart', JSON.stringify(result));
 }
@@ -252,7 +257,7 @@ function createFavContent() {
     Object.values(favItems).map(lego => {
       const parentDiv = document.createElement("div")
       parentDiv.className = "product"
-      parentDiv.id = `${lego.name}`;
+      parentDiv.id = `${lego.id}`;
 
       const newSpan = document.createElement('span')
       newSpan.textContent = `${lego.name} for £${lego.price}`;
@@ -267,16 +272,27 @@ function createFavContent() {
       removeFavbtn.className = "remove-fav-btn";
       removeFavbtn.textContent = "Remove from favourites"
 
+      // This buttons add to cart from favourites
+      const addToCartBtn = document.createElement("button")
+      addToCartBtn.type = "button";
+      addToCartBtn.className = "add-cart-btn";
+      addToCartBtn.textContent = "Add to basket"
+
+
       parentDiv.append(newSpan, imgElem, removeFavbtn)
       productContainer.append(parentDiv)
     });
   }
 }
 
+function init() {
+  loadBricks();
+  updateBasketNum();
+  createBasketContent();
+  createFavContent();
+}
 
-loadBricks();
-updateBasketNum();
-createBasketContent();
-createFavContent();
+// window.onload(init());
+init();
 
 export { addSetItems, addCartNumbers, addTotalCost, updateBasketNum, duplicateCheckCart, createBasketContent };
