@@ -60,7 +60,7 @@ function insertProduct(dataArray, brickIndex) {
 
     const descDiv = allBox.querySelector('.descDiv-class');
     descDiv.id = `descDiv-id${dataArray[brickIndex].id}`;
-    
+
     const newIDElem = document.createElement('p');
     newIDElem.id = `${dataArray[brickIndex].id}`;
     newIDElem.textContent = `${'ID: ' + dataArray[brickIndex].id}, ${'Name: ' + dataArray[brickIndex].name}`;
@@ -72,7 +72,10 @@ function insertProduct(dataArray, brickIndex) {
     newPriceElem.textContent = `${'Price: £' + dataArray[brickIndex].price}`;
 
     const stockElem = document.createElement('p');
-    stockElem.textContent = `${'Stock: ' + dataArray[brickIndex].stock}`;
+    stockElem.textContent = 'Limited stock left!';
+
+    const outOfStockElem = document.createElement('p');
+    outOfStockElem.textContent = 'Item coming back soon!';
 
 
     const addToFavButton = createFavouritesBtn(dataArray[brickIndex].id);
@@ -80,10 +83,13 @@ function insertProduct(dataArray, brickIndex) {
     // If product stock is < 1, make button not clickable
     if (dataArray[brickIndex].stock < 1) {
       const addToBasketButton = createButton(dataArray[brickIndex].id, dataArray[brickIndex].stock);
+      descDiv.append(newIDElem, newColElem, newPriceElem, addToBasketButton, addToFavButton, outOfStockElem);
+    } else if (dataArray[brickIndex].stock < 10) {
+      const addToBasketButton = createButton(dataArray[brickIndex].id, dataArray[brickIndex].stock);
       descDiv.append(newIDElem, newColElem, newPriceElem, addToBasketButton, addToFavButton, stockElem);
     } else {
       const addToBasketButton = createButton(dataArray[brickIndex].id);
-      descDiv.append(newIDElem, newColElem, newPriceElem, addToBasketButton, addToFavButton, stockElem);
+      descDiv.append(newIDElem, newColElem, newPriceElem, addToBasketButton, addToFavButton);
     }
     // const addToBasketButton = createButton(dataArray[brickIndex].id);
 
@@ -101,7 +107,7 @@ export function createButton(id, stockQty) {
   if (stockQty < 1) {
     makeBtn.disabled = true;
     makeBtn.textContent = 'Out of stock';
-    return makeBtn
+    return makeBtn;
   } else {
     return makeBtn;
   }

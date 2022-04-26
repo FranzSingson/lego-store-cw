@@ -93,11 +93,8 @@ p {
 /* Basket page */
 
 .product {
-  /* display: flex; */
-  /* justify-content: center; */
-  /* flex-wrap: wrap; */
   padding: 10px;
-  max-width: 700px;
+  max-width: 400px;
   margin: 0 auto;
   margin-top: 10px;
   border: solid black 1px;
@@ -105,10 +102,60 @@ p {
 
 .basketTotalContainer {
   padding: 10px;
-  max-width: 700px;
+  max-width: 400px;
   margin: 0 auto;
   margin-top: 10px;
-  border: solid red 2px;
+  /* border: solid red 2px; */
+  /* border-radius: 10px; */
+}
 
+#pay-basket-btn[disabled]{
+  background-color: grey;
+  margin-left: 0.5rem;
+}
+
+#pay-basket-btn {
+  background-color: green;
+  color: white;
+  margin-left: 0.5rem;
+}
+
+.product > img {
+  height: 10vh;
+  vertical-align: top;
+}
+
+.subtract-btn, .qty-span, .plus-btn, .remove-btn, .qty-x-price {
+  vertical-align: bottom;
+  margin-right: 0px;
+}
+
+.product > .subtract-btn, .product > .plus-btn{
   border-radius: 10px;
+}
+
+.qty-span {
+  font-weight: bold;
+  margin: 0 0.5rem 0 0.5rem;
+  /* background-color: grey; */
+}
+
+.qty-x-price {
+  margin-left: 0.5rem;
+}
+.add-cart-btn {
+  margin-left: 2.5rem;
+}
+
+.remove-btn, .remove-fav-btn {
+float: right;
+background-color: red;
+color: white;
+}
+
+
+/* Favourites Page */
+
+.product > img {
+  height: 10vh;
 }

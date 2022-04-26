@@ -181,13 +181,13 @@ function createBasketContent() {
     newDiv.className = 'basketTotalContainer';
     const newh4 = document.createElement('h4');
     newh4.className = 'basketTotal';
-    newh4.textContent = `Your Total is: £${cartCost}`;
+    newh4.textContent = `Your cart total is: £${cartCost}`;
     const clearBtn = document.createElement('button');
     clearBtn.className = 'clear-basket-btn';
     clearBtn.textContent = 'Clear Basket';
     const payBtn = document.createElement('button');
     payBtn.id = 'pay-basket-btn';
-    payBtn.textContent = 'Pay';
+    payBtn.textContent = 'PAY';
     payBtn.disabled = true;
     newDiv.append(newh4, clearBtn, payBtn);
     productContainer.append(newDiv);
@@ -200,10 +200,11 @@ function createBasketContent() {
 
       const spanName = document.createElement('span');
       spanName.textContent = `${lego.name} for £${lego.price}`;
+      spanName.className = 'desc-span';
 
       const imgElem = document.createElement('img');
       imgElem.src = `${lego.imgSrc}`;
-      imgElem.style = 'height: 25vh;';
+      // imgElem.style = 'height: 15vh;';
       imgElem.alt = `Image of ${lego.name}`;
 
       const subBtn = document.createElement('button');
@@ -223,13 +224,13 @@ function createBasketContent() {
       const removeBtn = document.createElement('button');
       removeBtn.className = 'remove-btn';
       removeBtn.type = 'button';
-      removeBtn.textContent = 'Remove product';
+      removeBtn.textContent = 'X';
 
       const spanQtyXPrice = document.createElement('span');
       spanQtyXPrice.className = 'qty-x-price';
       spanQtyXPrice.textContent = `£${lego.inCart * lego.price}`;
 
-      parentDiv.append(spanName, imgElem, subBtn, spanQty, addBtn, removeBtn, spanQtyXPrice);
+      parentDiv.append(imgElem, spanName, subBtn, spanQty, addBtn, spanQtyXPrice, removeBtn);
       productContainer.append(parentDiv);
     });
   }
@@ -265,12 +266,11 @@ function createFavContent() {
       const imgElem = document.createElement('img');
       imgElem.src = `${lego.imgSrc}`;
       imgElem.alt = `Image of ${lego.name}`;
-      imgElem.style = 'height: 25vh;';
 
       const removeFavbtn = document.createElement('button');
       removeFavbtn.type = 'button';
       removeFavbtn.className = 'remove-fav-btn';
-      removeFavbtn.textContent = 'Remove from favourites';
+      removeFavbtn.textContent = 'X';
 
       // This buttons add to cart from favourites
       const addToCartBtn = document.createElement('button');
@@ -279,7 +279,7 @@ function createFavContent() {
       addToCartBtn.textContent = 'Add to basket';
 
 
-      parentDiv.append(newSpan, imgElem, removeFavbtn);
+      parentDiv.append(imgElem, newSpan, removeFavbtn, addToCartBtn);
       productContainer.append(parentDiv);
     });
   }
