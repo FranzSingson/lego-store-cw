@@ -127,7 +127,11 @@ p {
 
 .product>img {
   height: 10vh;
-  vertical-align: top;
+  vertical-align: top; 
+}
+
+.desc-span {
+font-size: small;
 }
 
 .subtract-btn,
@@ -146,7 +150,7 @@ p {
 
 .qty-span {
   font-weight: bold;
-  margin: 0 0.5rem 0 0.5rem;
+  margin: 0 0.25rem 0 0.25rem;
   /* background-color: grey; */
 }
 

@@ -29,26 +29,22 @@ async function updateAuthUI() {
   if (isAuthenticated) {
     const user = await auth0.getUser();
 
-    const mainBoard = document.querySelector("#main-board");
-    const paymentBody = document.querySelector("#confirmation-body");
-    const cartContainer = document.querySelector("#basket-title");
-    const favContainer = document.querySelector(".fav-products-container");
+    const mainBoard = document.querySelector('#main-board');
+    const paymentBody = document.querySelector('#confirmation-body');
+    const cartContainer = document.querySelector('#basket-title');
+    const favContainer = document.querySelector('.fav-products-container');
 
     // When user is is the index.html
     if (mainBoard !== null) {
       const elem1 = document.getElementById('greeting');
       elem1.textContent = `Hello ${user.name}!`;
-    }
-    // When the user is in payment.html
-    else if (paymentBody !== null) {
+    } else if (paymentBody !== null) { // When the user is in payment.html
       const elem2 = document.querySelector('#confirmation-msg');
       elem2.textContent = `Thank you for your purchase ${user.name}!`;
       const elem3 = document.querySelector('#receipt-msg');
       elem3.textContent = `Your e-receipt has been sent to ${user.email}.`;
-    }
-    // // When the user is in basket.html
-    else if (cartContainer !== null) {
-      const payBtn = document.querySelector("#pay-basket-btn")
+    } else if (cartContainer !== null) { // When the user is in basket.html
+      const payBtn = document.querySelector('#pay-basket-btn');
       if (payBtn !== null) {
         payBtn.disabled = false;
         const elem1 = document.getElementById('greeting');
@@ -57,8 +53,7 @@ async function updateAuthUI() {
         const elem1 = document.getElementById('greeting');
         elem1.textContent = `Hello ${user.name}! Please add items to your cart.`;
       }
-    }
-    else if (favContainer !== null) {
+    } else if (favContainer !== null) {
       const elemMsg = document.querySelector('#greeting');
       elemMsg.textContent = `Hello ${user.name}!`;
     }

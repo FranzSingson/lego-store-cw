@@ -1,5 +1,3 @@
-import { createButton } from './index.js';
-
 async function loadBricks() {
   const response = await fetch('/bricks');
   if (response.ok) {
@@ -150,6 +148,8 @@ function addFavCartNumbers() {
   }
 }
 
+// This function removes object duplicates in the tempArr
+// https://stackoverflow.com/questions/40303637/how-to-add-non-duplicate-objects-in-an-array-in-javascript
 function duplicateCheckFav(array) {
   const result = array.filter(function (e) {
     const key = Object.keys(e).map(k => e[k]).join('|');
@@ -277,7 +277,7 @@ function createFavContent() {
       addToCartBtn.type = 'button';
       addToCartBtn.className = 'add-cart-btn';
 
-      if(lego.stock < 1) {
+      if (lego.stock < 1) {
         addToCartBtn.textContent = 'Out of stock';
         addToCartBtn.disabled = true;
         parentDiv.append(imgElem, newSpan, removeFavbtn, addToCartBtn);
@@ -298,7 +298,6 @@ function init() {
   createFavContent();
 }
 
-// window.onload(init());
 init();
 
 export { addSetItems, addCartNumbers, addTotalCost, updateBasketNum, duplicateCheckCart, createBasketContent };

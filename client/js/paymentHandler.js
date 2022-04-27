@@ -2,10 +2,10 @@
 async function loadBricks() {
   const response = await fetch('/bricks');
   if (response.ok) {
-    const data = await response.json();
+    // const data = await response.json();
     displayTotal();
     makeBackToHomeBtn();
-    updateStock()
+    updateStock();
   } else {
     console.log('not working');
   }
@@ -41,14 +41,13 @@ function makeBackToHomeBtn() {
 
 async function updateStock() {
   const boughtItems = JSON.parse(localStorage.getItem('productsBought'));
-  // console.log(cartArray);
   localStorage.setItem('productsBought', JSON.stringify(boughtItems));
   for (const cartItem of boughtItems) {
-    console.log(cartItem.id, cartItem.inCart)
+    console.log(cartItem.id, cartItem.inCart);
     const id = cartItem.id;
     const payload = cartItem;
 
-    console.log('Payload', payload)
+    console.log('Payload', payload);
     const response = await fetch(`/bricks/bought/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
@@ -57,6 +56,7 @@ async function updateStock() {
 
     if (response.ok) {
       const cart = await response.json();
+      console.log('Successful send', cart);
     } else {
       console.log('failed to send product', response);
     }

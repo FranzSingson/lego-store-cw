@@ -1,4 +1,4 @@
-import { addCartNumbers, addSetItems, updateBasketNum, createBasketContent, duplicateCheckCart } from './storage.js';
+import { addCartNumbers, addSetItems, updateBasketNum } from './storage.js';
 
 async function loadBricks() {
   const response = await fetch('/bricks');
@@ -9,13 +9,12 @@ async function loadBricks() {
     for (let i = 0; i < data.length; i++) {
       for (const btn of btns) {
         btn.addEventListener('click', () => {
-          if (data[i].id == btn.parentElement.id) {
+          const btnIndex = parseInt(btn.parentElement.id);
+          if (data[i].id === btnIndex) {
             const legoIndex = btn.parentElement.id;
-            // addSetItems(data[legoIndex]);
-            // duplicateCheckCart()
-            console.log(data[legoIndex])
-            addSetItems(data[legoIndex])
-            addCartNumbers(data[legoIndex])
+            console.log(data[legoIndex]);
+            addSetItems(data[legoIndex]);
+            addCartNumbers(data[legoIndex]);
             updateBasketNum();
           }
         });
@@ -44,7 +43,7 @@ function removeFromLocalStorage(itemId) {
   const favQty = JSON.parse(localStorage.getItem('favQty'));
 
   console.log(favItems);
-  const productId = parseInt(itemId)
+  const productId = parseInt(itemId);
   let tempArr = [];
   tempArr = favItems;
   for (let i = 0; i < tempArr.length; i++) {

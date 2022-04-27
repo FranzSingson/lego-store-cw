@@ -11,7 +11,7 @@ CREATE TABLE products( id INT,
 
 -- INSERT INTO products (id, itemName, price, imgSrc, itemType, colour, inCart, stock) VALUES ("0", 'Item0', "0.50", './images/brick0.jpg', 'brick', 'White', "0", "50");
 INSERT INTO products(id, name, price, imgSrc, itemType, colour, inCart, stock) VALUES
-    (0, 'Brick-White-2x4 ', 0.50, './images/brick0.jpg', 'brick', 'White', 0, 50), 
+    (0, 'Brick-White-2x4', 0.50, './images/brick0.jpg', 'brick', 'White', 0, 50), 
     (1, 'Brick-Red-2x4', 0.50, './images/brick1.jpg', 'brick', 'Red', 0, 50), 
     (2, 'Brick-Black-2x4', 0.50, './images/brick2.jpg', 'brick', 'Black', 0, 50), 
     (3, 'Brick-Orange-2x4', 0.50, './images/brick3.jpg', 'brick', 'Orange', 0, 50), 
