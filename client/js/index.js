@@ -6,7 +6,9 @@ async function loadBricks() {
     const bricksStock = 0;
     makeGrid(maxProducts);
     divideBoxes();
+    // for (const item of data) {
     insertProduct(data, bricksStock);
+    // }
     console.log(data);
   } else {
     console.log('not working');
@@ -57,11 +59,12 @@ function insertProduct(dataArray, brickIndex) {
     // imgElem.setAttribute('style', 'height: 80%; display: block; margin-left: auto; margin-right: auto; ');
 
     const descDiv = allBox.querySelector('.descDiv-class');
+    descDiv.className = `descDiv-class ${dataArray[brickIndex].itemType}`
     descDiv.id = `descDiv-id${dataArray[brickIndex].id}`;
 
     const newIDElem = document.createElement('p');
     newIDElem.id = `${dataArray[brickIndex].id}`;
-    newIDElem.textContent = `${'ID: ' + dataArray[brickIndex].id} ${dataArray[brickIndex].name}`;
+    newIDElem.textContent = `${dataArray[brickIndex].name}`;
 
     const newColElem = document.createElement('p');
     newColElem.textContent = `${'Colour: ' + dataArray[brickIndex].colour}`;
@@ -120,4 +123,66 @@ function createFavouritesBtn(id) {
   return makeFavBtn;
 }
 
+function makeApplyChangesBtn(elements) {
+  const newBtn = document.createElement("button")
+  newBtn.id = "save-filter-btn";
+  newBtn.textContent = "Apply changes"
+
+  const divFilter = document.querySelector("#div-filter");
+  divFilter.append(newBtn)
+
+  newBtn.addEventListener("click", () => {
+    if (elements !== undefined) {
+      for (const productSet of elements) {
+        const outerDiv = productSet.parentElement;
+        outerDiv.remove();
+      }
+    } else {
+      location.reload();
+    }
+  });
+}
+
+function filterHandlers() {
+  const boxAll = document.querySelector("#btn-all");
+  const boxBrick = document.querySelector("#btn-brick");
+  const boxSet = document.querySelector("#btn-set");
+
+  boxAll.addEventListener("change", (e) => {
+    const box = e.target;
+    if (box.checked) {
+      makeApplyChangesBtn()
+    } else if (!box.checked) {
+      const filterBtn = document.querySelector("#save-filter-btn")
+      filterBtn.remove();
+    }
+  });
+
+  boxBrick.addEventListener("change", (e) => {
+    const box = e.target;
+    if (box.checked) {
+      console.log("ticked")
+      const productSets = document.querySelectorAll(".set")
+      makeApplyChangesBtn(productSets)
+    } else if (!box.checked) {
+      const filterBtn = document.querySelector("#save-filter-btn")
+      filterBtn.remove();
+    }
+  });
+
+  boxSet.addEventListener("change", (e) => {
+    const box = e.target;
+    if (box.checked) {
+      console.log("ticked")
+      const productBricks = document.querySelectorAll(".brick")
+      makeApplyChangesBtn(productBricks)
+    } else if (!box.checked) {
+      const filterBtn = document.querySelector("#save-filter-btn")
+      filterBtn.remove();
+    }
+  });
+}
+
+
+filterHandlers();
 loadBricks();

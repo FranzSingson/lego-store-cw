@@ -45,7 +45,6 @@ async function getOneProduct(req, res) {
   res.json(result);
 }
 
-
 async function getOrderedItem(req, res) {
   const message = await mb.updateStock(req.body.id, req.body.inCart);
   res.json(message);

@@ -54,6 +54,13 @@ h1 {
   padding: 15px;
 }
 
+#div-filter {
+  font-weight: bolder;
+}
+
+#save-filter-btn {
+  margin-left: 0.5rem;
+}
 
 .allBoxes-class {
   height: 19rem;
@@ -83,10 +90,13 @@ h1 {
 
 .descDiv-class {
   height: 100px;
-  /* width: 15rem; */
   border: black solid 1px;
   background: lightblue;
   margin: 5px 5px 5px 5px;
+}
+
+.brick, .set {
+  padding: 0.2rem 0rem 0rem 0.2rem;
 }
 
 p {
