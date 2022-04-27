@@ -9,8 +9,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lego Store</title>
-
-    <style></style>
 </head>
 
 <h1>Lego Store</h1>
@@ -18,18 +16,18 @@
 <header class="nav-top">
     <a class ="home" href="index.html">Home</a>
     <a class="basket active" href="basket.html">Basket (<span>0</span>)</a>
-    <a class="favourites" href="favourites.html">Favourites (<span>0</span>)</a>
+    <a class="favourites" href="favourites.html">❤ (<span>0</span>)</a>
     <div id="login-div">
-        <p id="greeting">Hello user, please log in in order to complete your purchase.</p>
         <button id="login" disabled="true">Log in</button>
         <button id="logout" disabled="true">Log out</button>
     </div>
 </header>
 
-<h2>This is the Basket page</h2>
+<h2 id="greeting">Hello user!</h2>
+<h3 id="basket-title">This is the Basket page</h3>
 
 <div class="basket-products-container">
-    <h3>Your basket is empty at the moment.</h3>
+    <h3 id="empty-msg">Your basket is empty at the moment.</h3>
 </div>
 
 

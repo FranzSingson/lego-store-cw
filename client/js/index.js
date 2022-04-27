@@ -1,5 +1,3 @@
-
-
 async function loadBricks() {
   const response = await fetch('/bricks');
   if (response.ok) {
@@ -9,7 +7,7 @@ async function loadBricks() {
     makeGrid(maxProducts);
     divideBoxes();
     insertProduct(data, bricksStock);
-    console.log(data)
+    console.log(data);
   } else {
     console.log('not working');
   }
@@ -54,9 +52,9 @@ function insertProduct(dataArray, brickIndex) {
     const picDiv = allBox.querySelector('.picDiv-class');
     const imgElem = document.createElement('img');
     imgElem.src = dataArray[brickIndex].imgSrc;
-    imgElem.alt = `Image for ${dataArray[brickIndex].name}`
+    imgElem.alt = `Image for ${dataArray[brickIndex].name}`;
     picDiv.appendChild(imgElem);
-    imgElem.setAttribute('style', 'height: 80%; display: block; margin-left: auto; margin-right: auto; ');
+    // imgElem.setAttribute('style', 'height: 80%; display: block; margin-left: auto; margin-right: auto; ');
 
     const descDiv = allBox.querySelector('.descDiv-class');
     descDiv.id = `descDiv-id${dataArray[brickIndex].id}`;
@@ -115,7 +113,7 @@ export function createButton(id, stockQty) {
 
 function createFavouritesBtn(id) {
   const makeFavBtn = document.createElement('button');
-  makeFavBtn.textContent = 'Add to favourites';
+  makeFavBtn.textContent = '❤';
   makeFavBtn.type = 'button';
   makeFavBtn.dataset.id = id;
   makeFavBtn.className = 'add-favourites-btn-class';

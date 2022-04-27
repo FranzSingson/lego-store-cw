@@ -1,6 +1,4 @@
 // import { clearBasket } from './basketBtnHandlers';
-
-
 async function loadBricks() {
   const response = await fetch('/bricks');
   if (response.ok) {
@@ -65,7 +63,4 @@ async function updateStock() {
   }
 }
 
-
-
 loadBricks();
-

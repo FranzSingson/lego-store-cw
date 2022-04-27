@@ -16,15 +16,15 @@
 <header class="nav-top">
     <a class="home active" href="index.html">Home</a>
     <a class="basket" href="basket.html">Basket (<span>0</span>)</a>
-    <a class="favourites" href="favourites.html">Favourites (<span>0</span>)</a>
+    <a class="favourites" href="favourites.html">❤ (<span>0</span>)</a>
     <div id="login-div">
-        <p id="greeting">Hello user!</p>
         <button id="login" disabled="true">Log in</button>
         <button id="logout" disabled="true">Log out</button>
     </div>
 </header>
 
-<h2>This is the Home page</h2>
+<h2 id="greeting">Hello user!</h2>
+<h3>This is the Home page</h3>
 
 <main id="main-board"></main>
 
@@ -36,6 +36,6 @@
 
 <script src="./js/index.js" type="module"></script>
 <script src="./js/storage.js" type="module"></script>
-<script src="./js/basketBtnHandlers.js" type="module"></script>
+<!-- <script src="./js/basketBtnHandlers.js" type="module"></script> -->
 
 </html>

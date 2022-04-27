@@ -1,37 +1,49 @@
 /* Add a black background color to the top navigation */
 .nav-top {
-    background-color: grey;
-    overflow: hidden;
-  }
-  
-  /* Style the links inside the navigation bar */
-  .nav-top a {
-    float: left;
-    color: #f2f2f2;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
-  }
-  
-  /* Change the color of links on hover */
-  .nav-top a:hover {
-    background-color: #E3000B;
-    color: black;
-  }
-  
-  /* Add a color to the active/current link */
-  .nav-top a.active {
-    background-color: yellow;
-    color: black;
+  background-color: grey;
+  overflow: hidden;
+}
 
-  }
+/* Style the links inside the navigation bar */
+.nav-top a {
+  float: left;
+  color: white;
+  text-align: center;
+  padding: 16px;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: bold;
+}
 
-  #main-board {
-    display: flex;
-    grid-template-columns: repeat(autofit, 15rem);
-    flex-wrap: wrap;
-    /* grid-gap: 1rem; */
+/* Change the color of links on hover */
+.nav-top a:hover {
+  background-color: #E3000B;
+  color: black;
+}
+
+.name, .basket, .favourites {
+  height: 17px;
+}
+/* Add a color to the active/current link */
+.nav-top a.active {
+  background-color: yellow;
+  color: black;
+}
+
+#login-div {
+  text-align: right;
+  margin: 0px auto 0px auto;
+}
+
+#greeting {
+  margin-top: 2rem;
+}
+
+#main-board {
+  display: flex;
+  grid-template-columns: repeat(autofit, 15rem);
+  flex-wrap: wrap;
+  /* grid-gap: 1rem; */
 }
 
 h1 {
@@ -43,37 +55,30 @@ h1 {
 }
 
 
-.allBoxes-class{
-    height: 22rem;
-    width: 15rem;
-    border: black solid 1px;
-    background: yellow;
-    position: relative;
-    margin: 10px;
-    /* margin-right: 5rem; */
-    /* margin: 5rem 5rem 5rem 5rem; */
-}
-
-#login-div {
-  text-align:right; 
-  margin:0px auto 0px auto;
-}
-
-.SignInContainer {
-    /* height: auto; */
-    /* width: auto; */
-    border: 1px  solid black;
-    margin: 0%;
-    background-color: cyan;
+.allBoxes-class {
+  height: 20rem;
+  width: 10rem;
+  border: black solid 1px;
+  background: yellow;
+  position: relative;
+  margin: 8px;
+  /* margin-right: 5rem; */
+  /* margin: 5rem 5rem 5rem 5rem; */
 }
 
 .picDiv-class {
-  height: 200px;
-  /* width: 15rem; */
+  height: 180px;
   background: white;
-  margin: 10px 10px 10px 10px;
+  margin: 5px 5px 5px 5px;
   /* padding-top: 10px; */
   border: black solid 1px;
+}
+
+.picDiv-class > img {
+  width: 99%; 
+  display: block; 
+  margin-left: auto; 
+  margin-right: auto;
 }
 
 .descDiv-class {
@@ -81,7 +86,7 @@ h1 {
   /* width: 15rem; */
   border: black solid 1px;
   background: lightblue;
-  margin: 10px 10px 10px 10px;
+  margin: 5px 5px 5px 5px;
 }
 
 p {
@@ -109,7 +114,7 @@ p {
   /* border-radius: 10px; */
 }
 
-#pay-basket-btn[disabled]{
+#pay-basket-btn[disabled] {
   background-color: grey;
   margin-left: 0.5rem;
 }
@@ -120,17 +125,22 @@ p {
   margin-left: 0.5rem;
 }
 
-.product > img {
+.product>img {
   height: 10vh;
   vertical-align: top;
 }
 
-.subtract-btn, .qty-span, .plus-btn, .remove-btn, .qty-x-price {
+.subtract-btn,
+.qty-span,
+.plus-btn,
+.remove-btn,
+.qty-x-price {
   vertical-align: bottom;
   margin-right: 0px;
 }
 
-.product > .subtract-btn, .product > .plus-btn{
+.product>.subtract-btn,
+.product>.plus-btn {
   border-radius: 10px;
 }
 
@@ -143,19 +153,21 @@ p {
 .qty-x-price {
   margin-left: 0.5rem;
 }
+
 .add-cart-btn {
   margin-left: 2.5rem;
 }
 
-.remove-btn, .remove-fav-btn {
-float: right;
-background-color: red;
-color: white;
+.remove-btn,
+.remove-fav-btn {
+  float: right;
+  background-color: red;
+  color: white;
 }
 
 
 /* Favourites Page */
 
-.product > img {
+.product>img {
   height: 10vh;
 }

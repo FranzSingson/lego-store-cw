@@ -1,4 +1,4 @@
-import { addSetItems, createBasketContent, duplicateCheckCart } from './storage.js';
+import { addCartNumbers, addSetItems, updateBasketNum, createBasketContent, duplicateCheckCart } from './storage.js';
 
 async function loadBricks() {
   const response = await fetch('/bricks');
@@ -13,6 +13,10 @@ async function loadBricks() {
             const legoIndex = btn.parentElement.id;
             // addSetItems(data[legoIndex]);
             // duplicateCheckCart()
+            console.log(data[legoIndex])
+            addSetItems(data[legoIndex])
+            addCartNumbers(data[legoIndex])
+            updateBasketNum();
           }
         });
       }
@@ -60,7 +64,6 @@ function removeFromLocalStorage(itemId) {
   }
   location.reload();
 }
-
 
 function clearFav() {
   const clearBasketBtn = document.querySelector('.clear-fav-btn');

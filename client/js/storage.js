@@ -276,11 +276,17 @@ function createFavContent() {
       const addToCartBtn = document.createElement('button');
       addToCartBtn.type = 'button';
       addToCartBtn.className = 'add-cart-btn';
-      addToCartBtn.textContent = 'Add to basket';
 
-
-      parentDiv.append(imgElem, newSpan, removeFavbtn, addToCartBtn);
-      productContainer.append(parentDiv);
+      if(lego.stock < 1) {
+        addToCartBtn.textContent = 'Out of stock';
+        addToCartBtn.disabled = true;
+        parentDiv.append(imgElem, newSpan, removeFavbtn, addToCartBtn);
+        productContainer.append(parentDiv);
+      } else {
+        addToCartBtn.textContent = 'Add to basket';
+        parentDiv.append(imgElem, newSpan, removeFavbtn, addToCartBtn);
+        productContainer.append(parentDiv);
+      }
     });
   }
 }

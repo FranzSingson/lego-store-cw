@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <link rel="stylesheet" href="style.css">
+<script src="https://cdn.auth0.com/js/auth0-spa-js/1.13/auth0-spa-js.production.js" async defer></script>
+<script type="module" src="./js/auth0.js" async defer></script>
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lego Store</title>
-
-    <style></style>
 </head>
 
 <h1>Lego Store</h1>
@@ -16,15 +16,15 @@
 <header class="nav-top">
     <a class ="home" href="index.html">Home</a>
     <a class="basket" href="basket.html">Basket (<span>0</span>)</a>
-    <a class="favourites active" href="favourites.html">Favourites (<span>0</span>)</a>
+    <a class="favourites active" href="favourites.html">❤ (<span>0</span>)</a>
     <div id="login-div">
-        <p id="greeting">Hello user!</p>
         <button id="login" disabled="true">Log in</button>
         <button id="logout" disabled="true">Log out</button>
     </div>
 </header>
 
-<h2>This is the Favourites page</h2>
+<h2 id="greeting">Hello user!</h2>
+<h3>This is the Favourites page</h3>
 
 <div class="fav-products-container">
     <h3>Your Favourites is empty at the moment.</h3>
@@ -36,7 +36,6 @@
 </body>
 
 <script src="./js/storage.js" type="module"></script>
-<!-- <script src="./js/basketBtnHandlers.js" type="module"></script> -->
 <script src="./js/favBtnHandlers.js" type="module"></script>
 
 </html>

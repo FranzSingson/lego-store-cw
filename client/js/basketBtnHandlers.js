@@ -167,6 +167,7 @@ function makeEmptyBasketContent() {
   }
   document.querySelector('.basket span').textContent = 0;
   const h3Elem = document.createElement('h3');
+  h3Elem.id = "empty-msg";
   h3Elem.textContent = 'Your basket is empty at the moment.';
   container.append(h3Elem);
 }
@@ -194,4 +195,4 @@ function init() {
   nextBtnHandler();
 }
 
-window.onload(init());
+init();

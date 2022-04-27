@@ -29,21 +29,15 @@ async function updateAuthUI() {
   if (isAuthenticated) {
     const user = await auth0.getUser();
 
-    // When the user is in index.html
     const mainBoard = document.querySelector("#main-board");
     const paymentBody = document.querySelector("#confirmation-body");
-    const products = document.querySelector(".product");
+    const cartContainer = document.querySelector("#basket-title");
+    const favContainer = document.querySelector(".fav-products-container");
 
     // When user is is the index.html
     if (mainBoard !== null) {
       const elem1 = document.getElementById('greeting');
-      elem1.textContent = `Hello ${user.name} (${user.email})!`;
-
-      // When user is logged in, the button is clickable
-      // const addToBktBtns = document.querySelectorAll(".addToBasketButton-class");
-      // for (const btns of addToBktBtns) {
-      //   btns.disabled = false;
-      // }
+      elem1.textContent = `Hello ${user.name}!`;
     }
     // When the user is in payment.html
     else if (paymentBody !== null) {
@@ -51,13 +45,22 @@ async function updateAuthUI() {
       elem2.textContent = `Thank you for your purchase ${user.name}!`;
       const elem3 = document.querySelector('#receipt-msg');
       elem3.textContent = `Your e-receipt has been sent to ${user.email}.`;
-    } 
-    // When the user is in basket.html
-    else if (products !== null) {
+    }
+    // // When the user is in basket.html
+    else if (cartContainer !== null) {
       const payBtn = document.querySelector("#pay-basket-btn")
-      payBtn.disabled = false;
-      const elem1 = document.getElementById('greeting');
-      elem1.textContent = `Hello ${user.name} (${user.email})!`;
+      if (payBtn !== null) {
+        payBtn.disabled = false;
+        const elem1 = document.getElementById('greeting');
+        elem1.textContent = `Hello ${user.name}!`;
+      } else {
+        const elem1 = document.getElementById('greeting');
+        elem1.textContent = `Hello ${user.name}! Please add items to your cart.`;
+      }
+    }
+    else if (favContainer !== null) {
+      const elemMsg = document.querySelector('#greeting');
+      elemMsg.textContent = `Hello ${user.name}!`;
     }
   }
 }
