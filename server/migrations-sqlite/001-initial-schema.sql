@@ -15,7 +15,7 @@ INSERT INTO products(id, name, price, imgSrc, itemType, colour, inCart, stock) V
     (1, 'Brick-Red-2x4', 0.50, './images/brick1.jpg', 'brick', 'Red', 0, 50), 
     (2, 'Brick-Black-2x4', 0.50, './images/brick2.jpg', 'brick', 'Black', 0, 50), 
     (3, 'Brick-Orange-2x4', 0.50, './images/brick3.jpg', 'brick', 'Orange', 0, 50), 
-    (4, 'Brick-Greem-2x4', 0.50, './images/brick4.jpg', 'brick', 'Green', 0, 50), 
+    (4, 'Brick-Green-2x4', 0.50, './images/brick4.jpg', 'brick', 'Green', 0, 50), 
     (5, 'Brick-Yellow-2x4', 0.50, './images/brick5.jpg', 'brick', 'Yellow', 0, 50), 
     (6, 'Brick-Grey-2x4', 0.50, './images/brick6.jpg', 'brick', 'Grey', 0, 0), 
     (7, 'Tokyo-Set', 50, './images/item7.jpg', 'set', 'Multi', 0, 50), 

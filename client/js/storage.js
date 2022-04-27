@@ -199,7 +199,7 @@ function createBasketContent() {
       parentDiv.id = `${lego.name}`;
 
       const spanName = document.createElement('span');
-      spanName.textContent = `${lego.name} for £${lego.price}`;
+      spanName.textContent = `${lego.name}`;
       spanName.className = 'desc-span';
 
       const imgElem = document.createElement('img');
@@ -261,6 +261,7 @@ function createFavContent() {
       parentDiv.id = `${lego.id}`;
 
       const newSpan = document.createElement('span');
+      newSpan.className = "fav-desc-span"
       newSpan.textContent = `${lego.name} for £${lego.price}`;
 
       const imgElem = document.createElement('img');

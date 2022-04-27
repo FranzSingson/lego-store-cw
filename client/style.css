@@ -56,7 +56,7 @@ h1 {
 
 
 .allBoxes-class {
-  height: 20rem;
+  height: 19rem;
   width: 10rem;
   border: black solid 1px;
   background: yellow;
@@ -95,6 +95,10 @@ p {
   font-size: 0.8rem;
 }
 
+.add-favourites-btn-class {
+  margin-left: 0.3rem;
+}
+
 /* Basket page */
 
 .product {
@@ -130,8 +134,14 @@ p {
   vertical-align: top; 
 }
 
-.desc-span {
+.desc-span, .fav-desc-span {
 font-size: small;
+/* float: left; */
+position: absolute;
+/* bottom: 0; */
+/* right: 0; */
+/* width: 300px; */
+/* border: 3px solid #73AD21; */
 }
 
 .subtract-btn,
@@ -159,7 +169,8 @@ font-size: small;
 }
 
 .add-cart-btn {
-  margin-left: 2.5rem;
+  vertical-align: bottom;
+  margin-right: 0px;
 }
 
 .remove-btn,
