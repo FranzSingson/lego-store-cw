@@ -61,7 +61,7 @@ function insertProduct(dataArray, brickIndex) {
 
     const newIDElem = document.createElement('p');
     newIDElem.id = `${dataArray[brickIndex].id}`;
-    newIDElem.textContent = `${'ID: ' + dataArray[brickIndex].id}, ${'Name: ' + dataArray[brickIndex].name}`;
+    newIDElem.textContent = `${'ID: ' + dataArray[brickIndex].id} ${dataArray[brickIndex].name}`;
 
     const newColElem = document.createElement('p');
     newColElem.textContent = `${'Colour: ' + dataArray[brickIndex].colour}`;
@@ -70,7 +70,7 @@ function insertProduct(dataArray, brickIndex) {
     newPriceElem.textContent = `${'Price: £' + dataArray[brickIndex].price}`;
 
     const stockElem = document.createElement('p');
-    stockElem.textContent = 'Limited stock left!';
+    stockElem.textContent = `${dataArray[brickIndex].stock} in stock left!`;
 
     const outOfStockElem = document.createElement('p');
     outOfStockElem.textContent = 'Item coming back soon!';
