@@ -261,7 +261,7 @@ function createFavContent() {
       parentDiv.id = `${lego.id}`;
 
       const newSpan = document.createElement('span');
-      newSpan.className = "fav-desc-span"
+      newSpan.className = 'fav-desc-span';
       newSpan.textContent = `${lego.name} for £${lego.price}`;
 
       const imgElem = document.createElement('img');

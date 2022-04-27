@@ -59,7 +59,7 @@ function insertProduct(dataArray, brickIndex) {
     // imgElem.setAttribute('style', 'height: 80%; display: block; margin-left: auto; margin-right: auto; ');
 
     const descDiv = allBox.querySelector('.descDiv-class');
-    descDiv.className = `descDiv-class ${dataArray[brickIndex].itemType}`
+    descDiv.className = `descDiv-class ${dataArray[brickIndex].itemType}`;
     descDiv.id = `descDiv-id${dataArray[brickIndex].id}`;
 
     const newIDElem = document.createElement('p');
@@ -124,14 +124,17 @@ function createFavouritesBtn(id) {
 }
 
 function makeApplyChangesBtn(elements) {
-  const newBtn = document.createElement("button")
-  newBtn.id = "save-filter-btn";
-  newBtn.textContent = "Apply changes"
+  const divFilterContainer = document.querySelector('#div-filter');
+  const newBtn = document.createElement('button');
+  newBtn.id = 'save-filter-btn';
+  newBtn.textContent = 'Apply changes';
 
-  const divFilter = document.querySelector("#div-filter");
-  divFilter.append(newBtn)
+  if (divFilterContainer.lastChild.id !== 'save-filter-btn') {
+    const divFilter = document.querySelector('#div-filter');
+    divFilter.append(newBtn);
+  }
 
-  newBtn.addEventListener("click", () => {
+  newBtn.addEventListener('click', () => {
     if (elements !== undefined) {
       for (const productSet of elements) {
         const outerDiv = productSet.parentElement;
@@ -144,40 +147,40 @@ function makeApplyChangesBtn(elements) {
 }
 
 function filterHandlers() {
-  const boxAll = document.querySelector("#btn-all");
-  const boxBrick = document.querySelector("#btn-brick");
-  const boxSet = document.querySelector("#btn-set");
+  const boxAll = document.querySelector('#btn-all');
+  const boxBrick = document.querySelector('#btn-brick');
+  const boxSet = document.querySelector('#btn-set');
 
-  boxAll.addEventListener("change", (e) => {
+  boxAll.addEventListener('change', (e) => {
     const box = e.target;
     if (box.checked) {
-      makeApplyChangesBtn()
+      makeApplyChangesBtn();
     } else if (!box.checked) {
-      const filterBtn = document.querySelector("#save-filter-btn")
+      const filterBtn = document.querySelector('#save-filter-btn');
       filterBtn.remove();
     }
   });
 
-  boxBrick.addEventListener("change", (e) => {
+  boxBrick.addEventListener('change', (e) => {
     const box = e.target;
     if (box.checked) {
-      console.log("ticked")
-      const productSets = document.querySelectorAll(".set")
-      makeApplyChangesBtn(productSets)
+      console.log('ticked');
+      const productSets = document.querySelectorAll('.set');
+      makeApplyChangesBtn(productSets);
     } else if (!box.checked) {
-      const filterBtn = document.querySelector("#save-filter-btn")
+      const filterBtn = document.querySelector('#save-filter-btn');
       filterBtn.remove();
     }
   });
 
-  boxSet.addEventListener("change", (e) => {
+  boxSet.addEventListener('change', (e) => {
     const box = e.target;
     if (box.checked) {
-      console.log("ticked")
-      const productBricks = document.querySelectorAll(".brick")
-      makeApplyChangesBtn(productBricks)
+      console.log('ticked');
+      const productBricks = document.querySelectorAll('.brick');
+      makeApplyChangesBtn(productBricks);
     } else if (!box.checked) {
-      const filterBtn = document.querySelector("#save-filter-btn")
+      const filterBtn = document.querySelector('#save-filter-btn');
       filterBtn.remove();
     }
   });
