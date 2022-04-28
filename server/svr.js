@@ -2,7 +2,7 @@
 import authConfig from './auth-config.js';
 import express from 'express';
 // import { bricks } from './bricks.mjs';
-import * as mb from './database.js';
+import * as dataB from './database.js';
 
 const app = express();
 const port = 8080;
@@ -18,17 +18,8 @@ app.use(express.static('client'));
 //   res.json(bricks);
 // });
 
-/* List the products */
-// async function getProducts(req, res) {
-//   res.json(await mb.listProducts());
-// }
-
-// async function getOneProduct(req, res) {
-//   res.json(await mb.findProduct(req.params.id));
-// }
-
 async function getProducts(req, res) {
-  const result = await mb.listProducts();
+  const result = await dataB.listProducts();
   if (!result) {
     res.status(404).send('No match for that ID.');
     return;
@@ -37,7 +28,7 @@ async function getProducts(req, res) {
 }
 
 async function getOneProduct(req, res) {
-  const result = await mb.findProduct(req.params.id);
+  const result = await dataB.findProduct(req.params.id);
   if (!result) {
     res.status(404).send('No match for that ID.');
     return;
@@ -46,10 +37,9 @@ async function getOneProduct(req, res) {
 }
 
 async function getOrderedItem(req, res) {
-  const message = await mb.updateStock(req.body.id, req.body.inCart);
-  res.json(message);
+  const data = await dataB.updateStock(req.body.id, req.body.inCart);
+  res.json(data);
 }
-
 
 // From Stage simple board stage8
 function asyncWrap(f) {
@@ -76,5 +66,3 @@ app.listen(port, function () {
 // Note to self: To start this with "npm start" in the terminal
 // To stop, CTRL C
 // In URL type  localhost:8080
-
-// To use bricks.mjs, comment DB stuff and uncomment normal global app.gets
