@@ -49,7 +49,7 @@ function favToCart(itemArray, itemID, item) {
     if (tempArr[itemIndex].stock > tempArr[itemIndex].inCart) {
       tempArr[itemIndex].inCart += 1;
       console.log('IF HJERE');
-    } else { alert(`Item already in basket and you have reached the stock limit in your basket. We only have ${tempArr[itemIndex].stock} ${tempArr[itemIndex].name} in stock sorry.`) }
+    } else { alert(`Item already in basket and you have reached the stock limit in your basket. We only have ${tempArr[itemIndex].stock} ${tempArr[itemIndex].name} in stock sorry.`); }
   } else {
     console.log('ELSE');
     const selectedItem = itemArray.find((item) => item.id === itemID);
