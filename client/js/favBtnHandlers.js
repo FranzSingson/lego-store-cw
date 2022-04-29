@@ -1,4 +1,6 @@
-import { addCartNumbers, addSetItems, updateBasketNum } from './storage.js';
+import { addCartNumbers, updateBasketNum } from './storage.js';
+
+let tempArr = [];
 
 async function loadBricks() {
   const response = await fetch('/bricks');
@@ -13,7 +15,8 @@ async function loadBricks() {
           if (data[i].id === btnIndex) {
             const legoIndex = btn.parentElement.id;
             console.log(data[legoIndex]);
-            addSetItems(data[legoIndex]);
+            getExistingCart();
+            favToCart(data, data[legoIndex].id, data[legoIndex]);
             addCartNumbers(data[legoIndex]);
             updateBasketNum();
           }
@@ -23,6 +26,51 @@ async function loadBricks() {
     console.log('working');
   } else {
     console.log('not working');
+  }
+}
+
+function getExistingCart() {
+  let cartItems = localStorage.getItem('productsInCart');
+  cartItems = JSON.parse(cartItems);
+  // If theres something in cart items
+  if (cartItems !== null) {
+    tempArr = cartItems;
+  }
+}
+
+function favToCart(itemArray, itemID, item) {
+  let cartItems = localStorage.getItem('itemsInCart');
+  cartItems = JSON.parse(cartItems);
+  console.log(cartItems);
+  console.log('Basket', tempArr);
+
+  if (tempArr.some((selectedItem) => selectedItem.id === itemID)) {
+    const itemIndex = tempArr.findIndex(key => key.id === item.id);
+    if (tempArr[itemIndex].stock > tempArr[itemIndex].inCart) {
+      tempArr[itemIndex].inCart += 1;
+      console.log('IF HJERE');
+    } else { alert(`You have reached the limit. We only have ${tempArr[itemIndex].stock} ${tempArr[itemIndex].name} in stock sorry`) }
+  } else {
+    console.log('ELSE');
+    const selectedItem = itemArray.find((item) => item.id === itemID);
+    tempArr.push({ ...selectedItem, inCart: 1 });
+  }
+  localStorage.setItem('productsInCart', JSON.stringify(tempArr));
+  addTotalCost();
+}
+
+function addTotalCost() {
+  const basketItems = JSON.parse(localStorage.getItem('productsInCart'));
+
+  if (basketItems != null) {
+    let totalCost = 0;
+    for (const basketItem of basketItems) {
+      const newPrice = basketItem.inCart * basketItem.price;
+      totalCost += newPrice;
+      localStorage.setItem('totalCost', totalCost);
+    }
+  } else {
+    localStorage.setItem('totalCost', basketItems[0].price);
   }
 }
 

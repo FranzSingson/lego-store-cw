@@ -1,12 +1,21 @@
+let tempArr = [];
+
 async function loadBricks() {
   const response = await fetch('/bricks');
   if (response.ok) {
     const data = await response.json();
-    const carts = document.querySelectorAll('.addToBasketButton-class');
-    for (let i = 0; i < carts.length; i++) {
-      carts[i].addEventListener('click', () => {
+    const cartBtn = document.querySelectorAll('.addToBasketButton-class');
+    for (let i = 0; i < cartBtn.length; i++) {
+      cartBtn[i].addEventListener('click', () => {
         // console.log(bricks[i]);
-        addSetItems(data[i]);
+        // getExistingCart();
+        // addSetItems(data, data[i].id, data[i]);
+        // addCartNumbers(data[i]);
+        // // addTotalCost(data[i]);
+        // updateBasketNum();
+        console.log(getExistingCart());
+        getExistingCart();
+        addSetItems(data, data[i].id, data[i]);
         addCartNumbers(data[i]);
         // addTotalCost(data[i]);
         updateBasketNum();
@@ -16,7 +25,8 @@ async function loadBricks() {
     const favBtn = document.querySelectorAll('.add-favourites-btn-class');
     for (let i = 0; i < favBtn.length; i++) {
       favBtn[i].addEventListener('click', () => {
-        addFavSetItems(data[i]);
+        getExistingFavCart();
+        addFavSetItems(data, data[i].id, data[i]);
         addFavCartNumbers(data[i]);
       });
     }
@@ -25,22 +35,34 @@ async function loadBricks() {
   }
 }
 
-// Puts cart items into an array of objects
-function addSetItems(product) {
+function getExistingCart() {
   let cartItems = localStorage.getItem('productsInCart');
   cartItems = JSON.parse(cartItems);
-  let tempArr = [];
-
-  if (cartItems != null) {
+  // If theres something in cart items
+  if (cartItems !== null) {
     tempArr = cartItems;
-    tempArr.push(product);
-    duplicateCheckCart(tempArr, cartItems);
-  } else {
-    console.log('cart is empty so we add', product);
-    product.inCart = 1;
-    tempArr.push(product);
-    localStorage.setItem('productsInCart', JSON.stringify(tempArr));
+    return tempArr;
   }
+}
+
+function addSetItems(itemArray, itemID, item) {
+  let cartItems = localStorage.getItem('productsInCart');
+  cartItems = JSON.parse(cartItems);
+  console.log(cartItems);
+  console.log('Basket', tempArr);
+
+  if (tempArr.some((selectedItem) => selectedItem.id === itemID)) {
+    const itemIndex = tempArr.findIndex(key => key.id === item.id);
+    if (tempArr[itemIndex].stock > tempArr[itemIndex].inCart) {
+      tempArr[itemIndex].inCart += 1;
+      console.log('IF HJERE');
+    } else { alert(`You have reached the limit. We only have ${tempArr[itemIndex].stock} ${tempArr[itemIndex].name} in stock sorry`) }
+  } else {
+    console.log('ELSE');
+    const selectedItem = itemArray.find((item) => item.id === itemID);
+    tempArr.push({ ...selectedItem, inCart: 1 });
+  }
+  localStorage.setItem('productsInCart', JSON.stringify(tempArr));
   addTotalCost();
 }
 
@@ -107,29 +129,34 @@ function duplicateCheckCart(array) {
   localStorage.setItem('productsInCart', JSON.stringify(result));
 }
 
-// Puts favourite items into an array of objects
-function addFavSetItems(product) {
-  let cartItems = localStorage.getItem('productsInFav');
-  cartItems = JSON.parse(cartItems);
-  let tempArr = [];
 
-  if (cartItems != null) {
-    tempArr = cartItems;
-    tempArr.push(product);
-    duplicateCheckFav(tempArr, cartItems);
-  } else {
-    console.log('Fav is empty so we add', product);
-    product.inCart = 1;
-    tempArr.push(product);
-    localStorage.setItem('productsInFav', JSON.stringify(tempArr));
+let tempFavArr = [];
+function getExistingFavCart() {
+  let favItems = localStorage.getItem('productsInFav');
+  favItems = JSON.parse(favItems);
+  // If theres something in cart items
+  if (favItems !== null) {
+    tempFavArr = favItems;
   }
+}
 
-  // let tempArr1 = [];
-  // tempArr1 = cartItems;
-  // for (const basketItem of tempArr1) {
-  //   basketItem.inCart = 1;
-  // }
-  // localStorage.setItem('productsInCart', JSON.stringify(tempArr1));
+// Puts favourite items into an array of objects
+function addFavSetItems(itemArray, itemID, item) {
+  let favItems = localStorage.getItem('productsInFav');
+  favItems = JSON.parse(favItems);
+  console.log(favItems);
+  console.log('Basket', tempFavArr);
+
+  if (tempFavArr.some((selectedItem) => selectedItem.id === itemID)) {
+    const itemIndex = tempFavArr.findIndex(key => key.id === item.id);
+    tempFavArr[itemIndex].inCart = 1;
+    console.log('IF HJERE');
+  } else {
+    console.log('ELSE');
+    const selectedItem = itemArray.find((item) => item.id === itemID);
+    tempFavArr.push({ ...selectedItem, inCart: 1 });
+  }
+  localStorage.setItem('productsInFav', JSON.stringify(tempFavArr));
 }
 
 function addFavCartNumbers() {
@@ -146,22 +173,6 @@ function addFavCartNumbers() {
     localStorage.setItem('favtQty', 1);
     document.querySelector('.favourites span').textContent = 1;
   }
-}
-
-// This function removes object duplicates in the tempArr
-// https://stackoverflow.com/questions/40303637/how-to-add-non-duplicate-objects-in-an-array-in-javascript
-function duplicateCheckFav(array) {
-  const result = array.filter(function (e) {
-    const key = Object.keys(e).map(k => e[k]).join('|');
-    if (!this[key]) {
-      this[key] = true;
-      return true;
-    }
-  }, {});
-  for (const basketItem of result) {
-    basketItem.inCart = 1;
-  }
-  localStorage.setItem('productsInFav', JSON.stringify(result));
 }
 
 function createBasketContent() {
@@ -188,7 +199,7 @@ function createBasketContent() {
     const payBtn = document.createElement('button');
     payBtn.id = 'pay-basket-btn';
     payBtn.textContent = 'PAY';
-    payBtn.disabled = true;
+    // payBtn.disabled = true;
     newDiv.append(newh4, clearBtn, payBtn);
     productContainer.append(newDiv);
 
