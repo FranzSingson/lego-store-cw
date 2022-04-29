@@ -1,5 +1,5 @@
 // import { bricks } from './bricks.mjs';
-import { createBasketContent } from './storage.js';
+import { createBasketContent } from './pageContentMaker.js';
 
 async function loadBricks() {
   const response = await fetch('/bricks');
@@ -59,7 +59,7 @@ function addOne(item, elemId) {
         // This will update the qty x price span
         const qtyTimesPrice = document.querySelector(`#${elemId} > .qty-x-price`);
         qtyTimesPrice.textContent = `£${tempArr[i].inCart * tempArr[i].price}`;
-      } else { alert(`We only have ${tempArr[i].stock} ${tempArr[i].name} in stock sorry`); }
+      } else { alert(`We only have ${tempArr[i].stock} ${tempArr[i].name} in stock sorry.`); }
     }
   }
   localStorage.setItem('productsInCart', JSON.stringify(tempArr));

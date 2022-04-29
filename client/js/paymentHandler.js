@@ -1,4 +1,3 @@
-// import { clearBasket } from './basketBtnHandlers';
 async function loadBricks() {
   const response = await fetch('/bricks');
   if (response.ok) {
@@ -56,9 +55,9 @@ async function updateStock() {
 
     if (response.ok) {
       const cart = await response.json();
-      console.log('Successful send', cart);
+      console.log('Order is succesful', cart);
     } else {
-      console.log('failed to send product', response);
+      console.log('Failed to send Order', response);
     }
   }
 }

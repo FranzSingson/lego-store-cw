@@ -187,6 +187,9 @@ function filterHandlers() {
   });
 }
 
+function initIndex() {
+  filterHandlers();
+  loadBricks();
+}
 
-filterHandlers();
-loadBricks();
+initIndex();

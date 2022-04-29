@@ -21,7 +21,7 @@ app.use(express.static('client'));
 async function getProducts(req, res) {
   const result = await dataB.listProducts();
   if (!result) {
-    res.status(404).send('No match for that ID.');
+    res.status(404).send('No database found.');
     return;
   }
   res.json(result);
@@ -30,7 +30,7 @@ async function getProducts(req, res) {
 async function getOneProduct(req, res) {
   const result = await dataB.findProduct(req.params.id);
   if (!result) {
-    res.status(404).send('No match for that ID.');
+    res.status(404).send('ID does not match.');
     return;
   }
   res.json(result);

@@ -49,7 +49,7 @@ function favToCart(itemArray, itemID, item) {
     if (tempArr[itemIndex].stock > tempArr[itemIndex].inCart) {
       tempArr[itemIndex].inCart += 1;
       console.log('IF HJERE');
-    } else { alert(`You have reached the limit. We only have ${tempArr[itemIndex].stock} ${tempArr[itemIndex].name} in stock sorry`) }
+    } else { alert(`Item already in basket and you have reached the stock limit in your basket. We only have ${tempArr[itemIndex].stock} ${tempArr[itemIndex].name} in stock sorry.`) }
   } else {
     console.log('ELSE');
     const selectedItem = itemArray.find((item) => item.id === itemID);
@@ -136,6 +136,10 @@ function makeEmptyFavContent() {
   container.append(h3Elem);
 }
 
-loadBricks();
-removeFav();
-clearFav();
+function init() {
+  loadBricks();
+  removeFav();
+  clearFav();
+}
+
+init();
