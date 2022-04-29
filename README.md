@@ -16,7 +16,7 @@ This is the coursework of UP2011325. It is a Lego Store website which allows onl
 - They can also remove a specific item from the basket or clear the cart.
 - Only registered users can continue to purchase products, verified through Auth0.
 - After payment, stock levels are updated. Out of stock products are displayed but not available for purchase. Indicates that they are coming back.
--Filter is partially completed due to minor issues, only filters, product type at the moment.
+- Filter is partially completed due to minor issues, only filters, product type at the moment.
 
 ## Details of design and implementation rationale
 
@@ -32,7 +32,7 @@ This is the coursework of UP2011325. It is a Lego Store website which allows onl
 
 - When the Pay button is clicked, key data are sent to the server like id and the object payload as a PUT request. The reason behinds this allows my  server to responds to the PUT request and runs a query function to update my database.
 
-## Lists unfinished and future work
+## Lists of unfinished and future work
 
 - Improve CSS.
 - Further modularisation.
